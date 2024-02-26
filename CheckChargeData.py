@@ -46,20 +46,21 @@ def CheckChargeData():
                         voltage_in_volts = voltage_in_millivolts / 1000
                         print(f'Battery Voltage: {voltage_in_volts:.3f} V')
 
-                    if label == 'H20':  # PV yield today
-                        yield_today = float(value) # kWh
-                        print(f'Panel Yield Today: {yield_today:.3f} kWh')
-
                     if label == 'PPV': # PV Power
                         power = float(value) # W
                         print(f'Panel Power right now: {power:.3f} W')
 
+                    if label == 'H20':  # PV yield today
+                        yield_today = float(value) # kWh
+                        print(f'Panel Yield Today: {yield_today:.3f} kWh')
+
+
+
 
                 file1 = open('ChargeLog.txt', 'a')  # open log.txt
-                file1.write('Time: ' + strftime(
-                    "%Y-%m-%d %I:%M:%S %p ") + 'Voltage: ' + voltage_in_volts + 'Panel Power: ' + power + 'Yield: ' + yield_today)
+                file1.write('Time: ' + strftime("%Y-%m-%d %I:%M:%S %p ") + 'Voltage: ' + voltage_in_volts + 'Panel Power: ' + power + 'Yield: ' + yield_today)
                 file1.close()
-                return(voltage_in_volts, yield_today)
+                return(voltage_in_volts, power, yield_today)
 
     else:
         return(0.0, 0.0)
@@ -68,6 +69,6 @@ def CheckChargeData():
     mppt.close()
 
 if __name__ == '__main__':
-    (voltage_in_volts, yield_today) = CheckChargeData()
+    (voltage_in_volts, power, yield_today) = CheckChargeData()
     print('Voltage in V: ', voltage_in_volts)
     print('Yield today: ', yield_today)
