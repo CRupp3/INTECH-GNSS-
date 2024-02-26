@@ -1,0 +1,2 @@
+Time: 2024-02-26 01:08:21 PM Voltage: 12.830 Panel Power: 0.000 Yield:  0.000
+Time: 2024-02-26 01:09:00 PM Voltage: 12.830 Panel Power: 0.000 Yield:  0.000
