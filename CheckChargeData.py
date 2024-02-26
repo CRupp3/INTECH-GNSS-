@@ -57,10 +57,10 @@ def CheckChargeData():
 
 
 
-                file1 = open('ChargeLog.txt', 'a')  # open log.txt
-                file1.write('Time: ' + strftime("%Y-%m-%d %I:%M:%S %p ") + 'Voltage: ' + voltage_in_volts + 'Panel Power: ' + power + 'Yield: ' + yield_today)
-                file1.close()
-                return(voltage_in_volts, power, yield_today)
+        file1 = open('ChargeLog.txt', 'a')  # open log.txt
+        file1.write('Time: ' + strftime("%Y-%m-%d %I:%M:%S %p ") + 'Voltage: ' + voltage_in_volts + 'Panel Power: ' + power + 'Yield: ' + yield_today)
+        file1.close()
+        return(voltage_in_volts, power, yield_today)
 
     else:
         return(0.0, 0.0)
