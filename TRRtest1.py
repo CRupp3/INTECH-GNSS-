@@ -32,7 +32,6 @@ while True:
     days = 2
     if uptime > 2*24*60*60:  # reboots every 2 days
         os.system('reboot')
-    else:
 
     sleep(1*60)  # sleep 1 minute
 
