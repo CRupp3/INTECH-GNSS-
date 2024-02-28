@@ -18,10 +18,7 @@ from FormatTransmit import formatTransmit
 
 def formatFullSwarmMessage():
     time = datetime.utcnow().replace(tzinfo=timezone.utc).strftime('%m%d%y %H%M')
-    #(voltage_in_volts, power, yield_today) = CheckChargeData()
-    voltage_in_volts = 1.23456
-    power = 2.34567
-    yield_today = 3.45678
+    (voltage_in_volts, power, yield_today) = CheckChargeData()
 
     message = 'N001 '+ time + f' {voltage_in_volts:.3f}' + f' {power:.3f}' f' {yield_today:.3f}' + ' 0'
 
