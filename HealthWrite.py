@@ -5,4 +5,3 @@ import serial
 from time import sleep
 from time import strftime
 
-mppt =

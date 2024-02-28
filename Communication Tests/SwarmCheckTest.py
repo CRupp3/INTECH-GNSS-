@@ -2,8 +2,6 @@ from FormatReadNewest import formatReadNewest
 import serial
 from time import sleep
 from time import strftime
-from time import struct_time
-from FormatTransmit import formatTransmit
 
 # define the Ras Pi's UART pins and Swarm's baud rate
 uart_port = "/dev/ttyS0"
