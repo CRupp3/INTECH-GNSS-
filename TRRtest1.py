@@ -34,8 +34,10 @@ while True:
         os.system('reboot')
 
     sleep(1)#*60)  # sleep 1 minute
+    print(strftime("%S"))
 
     if strftime("%S") == "00":  # Top of the hour
+        print('Top')
         # Check Charge controller - done
         # Check Temperature - missing
         # Check Health - missing
@@ -85,6 +87,7 @@ while True:
         swarm.close()
 
     elif strftime("%S") in ["15", "30", "45"]:  # Not top of hour
+        print('Inner')
         # record charge controller data - done
         # ask swarm for received messages - done
 
@@ -108,5 +111,4 @@ while True:
         file2.close()
 
         swarm.close()
-    else:
-        ()
+
