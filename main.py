@@ -5,4 +5,3 @@ import os
 print('This is running on start from INTECH-GNSS-')
 
 # start TRRtest1.py
-os.system('python3 startuptest.py')
