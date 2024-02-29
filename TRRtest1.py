@@ -59,6 +59,7 @@ while True:
         sleep(0.01)
         data_left = swarm.in_waiting
         send_response += swarm.read(data_left)
+        send_response = send_response.decode()
 
         # log everything
         file1 = open('SwarmSendLog.txt', 'a')  # open log.txt
