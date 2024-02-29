@@ -57,7 +57,7 @@ while True:
         # Check for Confirmation
         send_response = swarm.read()
         sleep(0.01)
-        data_left = swarm.in_waiting()
+        data_left = swarm.in_waiting
         send_response += swarm.read(data_left)
 
         # log everything
@@ -76,7 +76,7 @@ while True:
         # Check for Response
         send_response = swarm.read()
         sleep(0.01)
-        data_left = swarm.in_waiting()
+        data_left = swarm.in_waiting
         send_response += swarm.read(data_left)
         send_response = send_response.decode()  # decode message
 
@@ -101,7 +101,7 @@ while True:
         # Read for Response
         send_response = swarm.read()
         sleep(0.01)
-        data_left = swarm.in_waiting()
+        data_left = swarm.in_waiting
         send_response += swarm.read(data_left)
         send_response = send_response.decode()  # decode message
 
