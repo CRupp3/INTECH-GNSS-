@@ -63,7 +63,7 @@ while True:
 
         # log everything
         file1 = open('SwarmSendLog.txt', 'a')  # open log.txt
-        file1.write('Communication that occured at' + strftime("%Y-%m-%d %I:%M:%S %p") + ' ' + message + '|' + formatted + 'received things: ' + send_response + '\n')
+        file1.write('Communication that occured at' + strftime("%Y-%m-%d %I:%M:%S %p") + ' message: ' + message + ' formatted message: ' + formatted + 'received things: ' + send_response + '\n')
         file1.close()
 
         # close serial connection
