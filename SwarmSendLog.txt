@@ -1,0 +1,12 @@
+Communication that occured at2024-02-29 06:00:29 PM message: N001 030124 0100 13.090 1.000 0.000 0 formatted message: $TD N001 030124 0100 13.090 1.000 0.000 0*6e
+received things: $TD ERR,CMD_TD_DATANOTAHEXSTRING*47
+
+Communication that occured at2024-02-29 07:00:35 PM message: N001 030124 0200 12.950 0.000 0.000 0 formatted message: $TD N001 030124 0200 12.950 0.000 0.000 0*68
+received things: $TD ERR,CMD_TD_DATANOTAHEXSTRING*47
+
+Communication that occured at2024-03-02 05:00:13 PM message: N001 030324 0000 13.850 5.000 8.000 0 formatted message: $TD "N001 030324 0000 13.850 5.000 8.000 0"*65
+received things: $TD OK,4616874197021*2a
+
+Communication that occured at2024-03-02 06:00:20 PM message: N001 030324 0100 13.860 4.000 9.000 0 formatted message: $TD "N001 030324 0100 13.860 4.000 9.000 0"*67
+received things: $TD OK,4616874197024*2f
+

@@ -17,7 +17,7 @@
 from NMEAChecksum import nmeaChecksum
 
 def formatTransmit(message):
-    stringSansCheck = ('$TD ' + message)
+    stringSansCheck = ('$TD ' + "\"" + message + "\"")
     checksum = nmeaChecksum(stringSansCheck)
     string = (stringSansCheck + '*' + checksum + "\n")
     return string

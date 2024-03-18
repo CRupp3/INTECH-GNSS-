@@ -24,20 +24,19 @@ from CheckChargeData import CheckChargeData
 import os
 
 # Starting from rc.local, called in main
-
-
 while True:
     # check uptime
     uptime = time.clock_gettime(time.CLOCK_BOOTTIME)  # returns uptime in seconds
-    days = 2
+    days = 7
     if uptime > 2*24*60*60:  # reboots every 2 days
         os.system('reboot')
 
     sleep(1*60)  # sleep 1 minute
-    # print(strftime("%S")) debug message
+    # print(strftime("%S")) # debug message
+
 
     if strftime("%M") == "00":  # Top of the hour
-        # print('Top') debug message
+        # print('Top') #debug message
         # Check Charge controller - done
         # Check Temperature - missing
         # Check Health - missing
@@ -88,7 +87,7 @@ while True:
         swarm.close()
 
     elif strftime("%M") in ["15", "30", "45"]:  # Not top of hour
-        # print('Inner') debug message
+        # print('Inner') # debug message
         # record charge controller data - done
         # ask swarm for received messages - done
 
