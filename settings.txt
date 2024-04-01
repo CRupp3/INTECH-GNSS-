@@ -1,2 +1,4 @@
-node, 001
-setup, 1
+#emask 
+5 25
+#amask
+34 135
