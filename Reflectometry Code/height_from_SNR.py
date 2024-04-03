@@ -5,6 +5,7 @@ from get_wavelength import get_wavelength
 from peak2noise import peak2noise
 from lomb import lomb
 from get_ofac_hifac import get_ofac_hifac
+from height_from_sat import height_from_sat
 
 def height_from_SNR(file, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots):
     custom_row_names = ["constellation", "satID", "elevAng", "azAng", "SNR_data", "year", "month", "day", "hour", "min", "sec"]
