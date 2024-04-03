@@ -1,5 +1,17 @@
 # Matthew Menendez-Aponte
-# Code for TRR System 1 test
+# Code for TRR System 2 test
+
+# Adding a bunch of stuff, including
+#   Full Health Reporting
+#       temperature from CPU temp
+#
+#   Water Level Computation
+#       record raw NMEA messages
+#       save NMEA messages in an organized way
+#       process NMEA messages into height with an associated time
+#
+#   Start from reboot functionality
+
 import time
 
 # Goals:
@@ -24,6 +36,8 @@ from CheckChargeData import CheckChargeData
 import os
 
 while True:
+
+
     # check uptime
     uptime = time.clock_gettime(time.CLOCK_MONOTONIC)  # returns uptime in seconds
     days = 7  # reboots every _ days
