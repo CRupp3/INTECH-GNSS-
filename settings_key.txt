@@ -1,0 +1,8 @@
+#emask 
+e_min e_max
+#amask
+a_min a_max
+# QC
+e_diff 
+#sleep
+voltage_cutoff temp_cutoff_low_celcius temp_cutoff_high_celcius sleep_mode_on_bool sleep_time_min
