@@ -19,4 +19,4 @@ printFailReasons = False #Prints reasons why satellites fail QC parameters to sc
 showAllPlots = False #Shows quadchart for every satellite arc and prints to screen all availible information 
 
 
-calculate_file_name(better_file, dynamic, interpolate, printFailReasons, showAllPlots)
+calculate_file_name(filename, dynamic, interpolate, printFailReasons, showAllPlots)
