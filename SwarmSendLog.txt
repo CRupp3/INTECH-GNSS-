@@ -10,3 +10,222 @@ received things: $TD OK,4616874197021*2a
 Communication that occured at2024-03-02 06:00:20 PM message: N001 030324 0100 13.860 4.000 9.000 0 formatted message: $TD "N001 030324 0100 13.860 4.000 9.000 0"*67
 received things: $TD OK,4616874197024*2f
 
+Communication that occured at2024-03-18 02:00:39 PM message: N001 031824 2000 13.730 3.000 3.000 0 formatted message: $TD "N001 031824 2000 13.730 3.000 3.000 0"*69
+received things: $TD OK,4616874295304*2f
+
+Communication that occured at2024-03-18 03:00:45 PM message: N001 031824 2100 13.710 3.000 4.000 0 formatted message: $TD "N001 031824 2100 13.710 3.000 4.000 0"*6d
+received things: $TD OK,4616874295318*22
+
+Communication that occured at2024-03-18 04:00:52 PM message: N001 031824 2200 13.680 3.000 4.000 0 formatted message: $TD "N001 031824 2200 13.680 3.000 4.000 0"*66
+received things: $TD OK,4616874295322*2b
+
+Communication that occured at2024-03-18 05:00:58 PM message: N001 031824 2300 13.690 3.000 4.000 0 formatted message: $TD "N001 031824 2300 13.690 3.000 4.000 0"*66
+received things: $TD OK,4616874295323*2a
+
+Communication that occured at2024-03-18 06:00:04 PM message: N001 031924 0000 13.680 2.000 5.000 0 formatted message: $TD "N001 031924 0000 13.680 2.000 5.000 0"*67
+received things: $TD OK,4616874328096*20
+
+Communication that occured at2024-03-18 07:00:11 PM message: N001 031924 0100 13.020 0.000 5.000 0 formatted message: $TD "N001 031924 0100 13.020 0.000 5.000 0"*68
+received things: $TD OK,4616874328097*21
+
+Communication that occured at2024-03-18 08:00:17 PM message: N001 031924 0200 12.950 0.000 5.000 0 formatted message: $TD "N001 031924 0200 12.950 0.000 5.000 0"*64
+received things: $TD OK,4616874328098*2e
+
+Communication that occured at2024-03-18 09:00:24 PM message: N001 031924 0300 12.910 0.000 5.000 0 formatted message: $TD "N001 031924 0300 12.910 0.000 5.000 0"*61
+received things: $TD OK,4616874328099*2f
+
+Communication that occured at2024-03-18 10:00:30 PM message: N001 031924 0400 12.870 0.000 5.000 0 formatted message: $TD "N001 031924 0400 12.870 0.000 5.000 0"*61
+received things: $TD OK,4616874328100*2e
+
+Communication that occured at2024-03-18 11:00:37 PM message: N001 031924 0500 12.830 0.000 5.000 0 formatted message: $TD "N001 031924 0500 12.830 0.000 5.000 0"*64
+received things: $TD OK,4616874328101*2f
+
+Communication that occured at2024-03-19 12:00:43 AM message: N001 031924 0600 12.820 0.000 0.000 0 formatted message: $TD "N001 031924 0600 12.820 0.000 0.000 0"*63
+received things: $TD OK,4616874328102*2c
+
+Communication that occured at2024-03-19 01:00:50 AM message: N001 031924 0700 12.790 0.000 0.000 0 formatted message: $TD "N001 031924 0700 12.790 0.000 0.000 0"*66
+received things: $TD OK,4616874328103*2d
+
+Communication that occured at2024-03-19 02:00:56 AM message: N001 031924 0800 12.750 0.000 0.000 0 formatted message: $TD "N001 031924 0800 12.750 0.000 0.000 0"*65
+received things: $TD OK,4616874328114*2b
+
+Communication that occured at2024-03-19 03:00:03 AM message: N001 031924 0900 12.740 0.000 0.000 0 formatted message: $TD "N001 031924 0900 12.740 0.000 0.000 0"*65
+received things: $TD OK,4616874328065*2c
+
+Communication that occured at2024-03-19 04:00:09 AM message: N001 031924 1000 12.710 0.000 0.000 0 formatted message: $TD "N001 031924 1000 12.710 0.000 0.000 0"*68
+received things: $TD OK,4616874328066*2f
+
+Communication that occured at2024-03-19 05:00:15 AM message: N001 031924 1100 12.700 0.000 0.000 0 formatted message: $TD "N001 031924 1100 12.700 0.000 0.000 0"*68
+received things: $TD OK,4616874328067*2e
+
+Communication that occured at2024-03-19 06:00:22 AM message: N001 031924 1200 12.670 0.000 0.000 0 formatted message: $TD "N001 031924 1200 12.670 0.000 0.000 0"*6d
+received things: $TD OK,4616874328068*21
+
+Communication that occured at2024-03-19 07:00:28 AM message: N001 031924 1300 12.670 0.000 0.000 0 formatted message: $TD "N001 031924 1300 12.670 0.000 0.000 0"*6c
+received things: $TD OK,4616874328069*20
+
+Communication that occured at2024-03-19 08:00:35 AM message: N001 031924 1400 13.030 3.000 0.000 0 formatted message: $TD "N001 031924 1400 13.030 3.000 0.000 0"*6b
+received things: $TD OK,4616874328070*28
+
+Communication that occured at2024-03-19 09:00:41 AM message: N001 031924 1500 13.850 6.000 0.000 0 formatted message: $TD "N001 031924 1500 13.850 6.000 0.000 0"*61
+received things: $TD OK,4616874328071*29
+
+Communication that occured at2024-03-19 10:00:48 AM message: N001 031924 1600 13.750 4.000 1.000 0 formatted message: $TD "N001 031924 1600 13.750 4.000 1.000 0"*6e
+received things: $TD OK,4616874328072*2a
+
+Communication that occured at2024-03-19 11:00:54 AM message: N001 031924 1700 13.700 4.000 1.000 0 formatted message: $TD "N001 031924 1700 13.700 4.000 1.000 0"*6a
+received things: $TD OK,4616874328074*2c
+
+Communication that occured at2024-03-19 12:00:01 PM message: N001 031924 1800 13.690 4.000 2.000 0 formatted message: $TD "N001 031924 1800 13.690 4.000 2.000 0"*6e
+received things: $TD OK,4616874328089*2e
+
+Communication that occured at2024-03-19 01:00:07 PM message: N001 031924 1900 13.660 3.000 2.000 0 formatted message: $TD "N001 031924 1900 13.660 3.000 2.000 0"*67
+received things: $TD OK,4616874328095*23
+
+Communication that occured at2024-03-19 02:00:14 PM message: N001 031924 2000 13.620 3.000 3.000 0 formatted message: $TD "N001 031924 2000 13.620 3.000 3.000 0"*68
+received things: $TD OK,4616874328102*2c
+
+Communication that occured at2024-03-19 03:00:20 PM message: N001 031924 2100 13.620 3.000 3.000 0 formatted message: $TD "N001 031924 2100 13.620 3.000 3.000 0"*69
+received things: $TD OK,4616874328103*2d
+
+Communication that occured at2024-03-19 04:00:26 PM message: N001 031924 2200 13.630 3.000 3.000 0 formatted message: $TD "N001 031924 2200 13.630 3.000 3.000 0"*6b
+received things: $TD OK,4616874328104*2a
+
+Communication that occured at2024-03-19 05:00:33 PM message: N001 031924 2300 13.650 2.000 4.000 0 formatted message: $TD "N001 031924 2300 13.650 2.000 4.000 0"*6a
+received things: $TD OK,4616874328105*2b
+
+Communication that occured at2024-03-19 06:00:39 PM message: N001 032024 0000 13.670 2.000 4.000 0 formatted message: $TD "N001 032024 0000 13.670 2.000 4.000 0"*63
+received things: $TD OK,4616874360875*29
+
+Communication that occured at2024-03-19 07:00:46 PM message: N001 032024 0100 13.020 0.000 4.000 0 formatted message: $TD "N001 032024 0100 13.020 0.000 4.000 0"*63
+received things: $TD OK,4616874360876*2a
+
+Communication that occured at2024-03-19 08:00:52 PM message: N001 032024 0200 12.940 0.000 4.000 0 formatted message: $TD "N001 032024 0200 12.940 0.000 4.000 0"*6e
+received things: $TD OK,4616874360877*2b
+
+Communication that occured at2024-03-19 09:00:59 PM message: N001 032024 0300 12.900 0.000 4.000 0 formatted message: $TD "N001 032024 0300 12.900 0.000 4.000 0"*6b
+received things: $TD OK,4616874360878*24
+
+Communication that occured at2024-03-19 10:00:05 PM message: N001 032024 0400 12.860 0.000 4.000 0 formatted message: $TD "N001 032024 0400 12.860 0.000 4.000 0"*6b
+received things: $TD OK,4616874360881*22
+
+Communication that occured at2024-03-19 11:00:12 PM message: N001 032024 0500 12.830 0.000 4.000 0 formatted message: $TD "N001 032024 0500 12.830 0.000 4.000 0"*6f
+received things: $TD OK,4616874360908*22
+
+Communication that occured at2024-03-20 12:00:18 AM message: N001 032024 0600 12.790 0.000 0.000 0 formatted message: $TD "N001 032024 0600 12.790 0.000 0.000 0"*6d
+received things: $TD OK,4616874360913*28
+
+Communication that occured at2024-03-20 01:00:25 AM message: N001 032024 0700 12.780 0.000 0.000 0 formatted message: $TD "N001 032024 0700 12.780 0.000 0.000 0"*6d
+received things: $TD OK,4616874360915*2e
+
+Communication that occured at2024-03-20 02:00:31 AM message: N001 032024 0800 12.750 0.000 0.000 0 formatted message: $TD "N001 032024 0800 12.750 0.000 0.000 0"*6f
+received things: $TD OK,4616874360922*2a
+
+Communication that occured at2024-03-20 03:00:37 AM message: N001 032024 0900 12.720 0.000 0.000 0 formatted message: $TD "N001 032024 0900 12.720 0.000 0.000 0"*69
+received things: $TD OK,4616874360928*20
+
+Communication that occured at2024-03-20 04:00:44 AM message: N001 032024 1000 12.710 0.000 0.000 0 formatted message: $TD "N001 032024 1000 12.710 0.000 0.000 0"*62
+received things: $TD OK,4616874360929*21
+
+Communication that occured at2024-03-20 05:00:50 AM message: N001 032024 1100 12.700 0.000 0.000 0 formatted message: $TD "N001 032024 1100 12.700 0.000 0.000 0"*62
+received things: $TD OK,4616874360930*29
+
+Communication that occured at2024-03-20 06:00:57 AM message: N001 032024 1200 12.670 0.000 0.000 0 formatted message: $TD "N001 032024 1200 12.670 0.000 0.000 0"*67
+received things: $TD OK,4616874360931*28
+
+Communication that occured at2024-03-20 07:00:03 AM message: N001 032024 1300 12.670 0.000 0.000 0 formatted message: $TD "N001 032024 1300 12.670 0.000 0.000 0"*66
+received things: $TD OK,4616874360932*2b
+
+Communication that occured at2024-03-20 08:00:10 AM message: N001 032024 1400 13.030 3.000 0.000 0 formatted message: $TD "N001 032024 1400 13.030 3.000 0.000 0"*61
+received things: $TD OK,4616874360933*2a
+
+Communication that occured at2024-03-20 09:00:16 AM message: N001 032024 1500 13.870 5.000 1.000 0 formatted message: $TD "N001 032024 1500 13.870 5.000 1.000 0"*6b
+received things: $TD OK,4616874360934*2d
+
+Communication that occured at2024-03-20 10:00:23 AM message: N001 032024 1600 13.830 4.000 1.000 0 formatted message: $TD "N001 032024 1600 13.830 4.000 1.000 0"*6d
+received things: $TD OK,4616874360935*2c
+
+Communication that occured at2024-03-20 11:00:29 AM message: N001 032024 1700 13.780 3.000 2.000 0 formatted message: $TD "N001 032024 1700 13.780 3.000 2.000 0"*6c
+received things: $TD OK,4616874360938*21
+
+Communication that occured at2024-03-20 12:00:35 PM message: N001 032024 1800 13.740 3.000 2.000 0 formatted message: $TD "N001 032024 1800 13.740 3.000 2.000 0"*6f
+received things: $TD OK,4616874360951*2e
+
+Communication that occured at2024-03-20 03:00:16 PM message: N001 032024 2100 13.680 3.000 3.000 0 formatted message: $TD "N001 032024 2100 13.680 3.000 3.000 0"*69
+received things: $TD OK,4616874360974*29
+
+Communication that occured at2024-03-20 04:00:22 PM message: N001 032024 2200 13.680 3.000 3.000 0 formatted message: $TD "N001 032024 2200 13.680 3.000 3.000 0"*6a
+received things: $TD OK,4616874360981*23
+
+Communication that occured at2024-03-20 05:00:29 PM message: N001 032024 2300 13.710 2.000 4.000 0 formatted message: $TD "N001 032024 2300 13.710 2.000 4.000 0"*65
+received things: $TD OK,4616874360982*20
+
+Communication that occured at2024-03-20 06:00:35 PM message: N001 032124 0000 13.690 2.000 4.000 0 formatted message: $TD "N001 032124 0000 13.690 2.000 4.000 0"*6c
+received things: $TD OK,4616874393754*29
+
+Communication that occured at2024-03-20 07:00:41 PM message: N001 032124 0100 13.020 0.000 4.000 0 formatted message: $TD "N001 032124 0100 13.020 0.000 4.000 0"*62
+received things: $TD OK,4616874393755*28
+
+Communication that occured at2024-03-20 08:00:48 PM message: N001 032124 0200 12.940 0.000 4.000 0 formatted message: $TD "N001 032124 0200 12.940 0.000 4.000 0"*6f
+received things: $TD OK,4616874393756*2b
+
+Communication that occured at2024-03-20 09:00:54 PM message: N001 032124 0300 12.900 0.000 4.000 0 formatted message: $TD "N001 032124 0300 12.900 0.000 4.000 0"*6a
+received things: $TD OK,4616874393757*2a
+
+Communication that occured at2024-03-20 10:00:01 PM message: N001 032124 0400 12.860 0.000 4.000 0 formatted message: $TD "N001 032124 0400 12.860 0.000 4.000 0"*6a
+received things: $TD OK,4616874393758*25
+
+Communication that occured at2024-03-20 11:00:07 PM message: N001 032124 0500 12.820 0.000 4.000 0 formatted message: $TD "N001 032124 0500 12.820 0.000 4.000 0"*6f
+received things: $TD OK,4616874393766*28
+
+Communication that occured at2024-03-21 12:00:14 AM message: N001 032124 0600 12.790 0.000 0.000 0 formatted message: $TD "N001 032124 0600 12.790 0.000 0.000 0"*6c
+received things: $TD OK,4616874393767*29
+
+Communication that occured at2024-03-21 01:00:20 AM message: N001 032124 0700 12.750 0.000 0.000 0 formatted message: $TD "N001 032124 0700 12.750 0.000 0.000 0"*61
+received things: $TD OK,4616874393768*26
+
+Communication that occured at2024-03-21 02:00:27 AM message: N001 032124 0800 12.730 0.000 0.000 0 formatted message: $TD "N001 032124 0800 12.730 0.000 0.000 0"*68
+received things: $TD OK,4616874393775*2a
+
+Communication that occured at2024-03-21 03:00:33 AM message: N001 032124 0900 12.700 0.000 0.000 0 formatted message: $TD "N001 032124 0900 12.700 0.000 0.000 0"*6a
+received things: $TD OK,4616874393778*27
+
+Communication that occured at2024-03-21 04:00:40 AM message: N001 032124 1000 12.670 0.000 0.000 0 formatted message: $TD "N001 032124 1000 12.670 0.000 0.000 0"*64
+received things: $TD OK,4616874393779*26
+
+Communication that occured at2024-03-21 05:00:46 AM message: N001 032124 1100 12.670 0.000 0.000 0 formatted message: $TD "N001 032124 1100 12.670 0.000 0.000 0"*65
+received things: $TD OK,4616874393780*20
+
+Communication that occured at2024-03-21 06:00:52 AM message: N001 032124 1200 12.630 0.000 0.000 0 formatted message: $TD "N001 032124 1200 12.630 0.000 0.000 0"*62
+received things: $TD OK,4616874393782*22
+
+Communication that occured at2024-03-21 07:00:59 AM message: N001 032124 1300 12.630 0.000 0.000 0 formatted message: $TD "N001 032124 1300 12.630 0.000 0.000 0"*63
+received things: $TD OK,4616874393783*23
+
+Communication that occured at2024-03-21 08:00:05 AM message: N001 032124 1400 13.120 4.000 0.000 0 formatted message: $TD "N001 032124 1400 13.120 4.000 0.000 0"*67
+received things: $TD OK,4616874393784*24
+
+Communication that occured at2024-03-21 09:00:12 AM message: N001 032124 1500 13.870 6.000 1.000 0 formatted message: $TD "N001 032124 1500 13.870 6.000 1.000 0"*69
+received things: $TD OK,4616874393785*25
+
+Communication that occured at2024-03-21 10:00:18 AM message: N001 032124 1600 13.770 5.000 1.000 0 formatted message: $TD "N001 032124 1600 13.770 5.000 1.000 0"*66
+received things: $TD OK,4616874393786*26
+
+Communication that occured at2024-03-21 11:00:25 AM message: N001 032124 1700 13.680 4.000 2.000 0 formatted message: $TD "N001 032124 1700 13.680 4.000 2.000 0"*6b
+received things: $TD OK,4616874393802*25
+
+Communication that occured at2024-03-21 12:00:31 PM message: N001 032124 1800 13.640 4.000 2.000 0 formatted message: $TD "N001 032124 1800 13.640 4.000 2.000 0"*68
+received things: $TD OK,4616874393805*22
+
+Communication that occured at2024-03-21 01:00:38 PM message: N001 032124 1900 13.600 3.000 3.000 0 formatted message: $TD "N001 032124 1900 13.600 3.000 3.000 0"*6b
+received things: $TD OK,4616874393809*2e
+
+Communication that occured at2024-03-21 02:00:44 PM message: N001 032124 2000 13.580 3.000 3.000 0 formatted message: $TD "N001 032124 2000 13.580 3.000 3.000 0"*6a
+received things: $TD OK,4616874393815*23
+
+Communication that occured at2024-03-21 03:00:50 PM message: N001 032124 2100 13.580 3.000 3.000 0 formatted message: $TD "N001 032124 2100 13.580 3.000 3.000 0"*6b
+received things: $TD OK,4616874393826*23
+
+Communication that occured at2024-03-21 04:00:57 PM message: N001 032124 2200 13.600 3.000 4.000 0 formatted message: $TD "N001 032124 2200 13.600 3.000 4.000 0"*64
+received things: $TD OK,4616874393827*22
+

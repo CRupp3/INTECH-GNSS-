@@ -1,4 +1,4 @@
-#emask_min
+text = """#emask_min
 5
 #emas_max
 25
@@ -17,4 +17,9 @@
 #sleep_mode_on_bool 
 0 
 #sleep_time_min
-60
+60"""
+
+# Calculate byte size
+byte_size = len(text.encode('utf-8'))
+
+print("Byte size:", byte_size)
