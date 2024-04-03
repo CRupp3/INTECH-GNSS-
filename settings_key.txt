@@ -1,8 +1,20 @@
-#emask 
-e_min e_max
-#amask
-a_min a_max
-# QC
+#emask_min
+e_min 
+#emas_max
+e_mask_max
+#amask_min
+a_min 
+#amask_max
+a_max
+#e_diff
 e_diff 
-#sleep
-voltage_cutoff temp_cutoff_low_celcius temp_cutoff_high_celcius sleep_mode_on_bool sleep_time_min
+#volateg_cutoff
+voltage_cutoff
+#temp_cutoff_low_celcius
+temp_cutoff_low_celcius 
+#temp_cutoff_high_celcius
+temp_cutoff_high_celcius
+#sleep_mode_on_bool 
+sleep_mode_on_bool 
+#sleep_time_min
+sleep_time_min

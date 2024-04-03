@@ -19,6 +19,10 @@ def msg_handeler(last_MSG):
     with open(file_path, 'w') as file: # hardcode file path for settings.txt
         file.write(last_MSG)
 
+
+
+#########################################################################
+
 file_path = 'SwarmRecievedLog.txt'  # hardcode file path for settings.tt
 last_MSG = get_last_MSG(file_path)
 print("MSG:", last_MSG)
