@@ -34,14 +34,54 @@ class Watcher:
 
 class Handler(FileSystemEventHandler):
 
+    # @staticmethod
+    # def compile_recent_files(directory, output_file):
+    #     files = [f for f in os.listdir(directory) if f.endswith('.txt')]
+    #     files.sort(key=lambda x: os.path.getmtime(os.path.join(directory, x)), reverse=True)
+    #     recent_files = files[:min(len(files), 8)]
+    #     with open(output_file, 'w') as outfile:
+    #         print("Adding files to output:")
+    #         for fname in recent_files:
+    #             print(fname)
+    #             with open(os.path.join(directory, fname)) as infile:
+    #                 for line in infile:
+    #                     outfile.write(line)
+                        
+    @staticmethod
+    def extract_datetime_from_filename(filename):
+        # Assuming the format is 'YYYY MM DD_HH MM.txt'
+        try:
+            datetime_part = filename[:-4]  # Remove the '.txt' extension
+            return datetime.strptime(datetime_part, "%Y %m %d_%H %M")
+        except ValueError:
+            return None
+
     @staticmethod
     def compile_recent_files(directory, output_file):
-        files = [f for f in os.listdir(directory) if f.endswith('.txt')]
-        files.sort(key=lambda x: os.path.getmtime(os.path.join(directory, x)), reverse=True)
-        recent_files = files[:min(len(files), 8)]
+        all_files = [f for f in os.listdir(directory) if f.endswith('.txt')]
+        # Extract datetime information from filenames
+        files_with_datetime = [(f, Handler.extract_datetime_from_filename(f)) for f in all_files]
+        # Filter out files where the datetime could not be parsed
+        files_with_datetime = [f for f in files_with_datetime if f[1] is not None]
+
+        if not files_with_datetime:
+            print("No valid files found.")
+            return
+
+        # Sort files by datetime, most recent first
+        files_with_datetime.sort(key=lambda x: x[1], reverse=True)
+
+        # Determine the 2-hour window based on the most recent file's datetime
+        most_recent_time = files_with_datetime[0][1]
+        two_hours_ago = most_recent_time - timedelta(hours=2)
+
+        # Filter files within the last 2 hours
+        recent_files = [f for f in files_with_datetime if f[1] >= two_hours_ago][:8]
+
+        # Write the contents of the filtered files into the output file
         with open(output_file, 'w') as outfile:
             print("Adding files to output:")
-            for fname in recent_files:
+            for fname, _ in recent_files:
                 print(fname)
                 with open(os.path.join(directory, fname)) as infile:
                     for line in infile:
