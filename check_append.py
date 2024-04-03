@@ -87,6 +87,7 @@ class Handler(FileSystemEventHandler):
                 with open(os.path.join(directory, fname)) as infile:
                     for line in infile:
                         outfile.write(line)
+        # Insert into IR processing code here (compiled_file.txt)
 
     def on_created(self, event):
         if event.is_directory:
