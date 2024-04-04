@@ -35,6 +35,9 @@ from FormatReadNewest import formatReadNewest
 from CheckChargeData import CheckChargeData
 import os
 
+
+
+
 while True:
 
 

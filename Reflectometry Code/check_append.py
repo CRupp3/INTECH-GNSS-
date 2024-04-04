@@ -3,9 +3,10 @@ from watchdog.events import FileSystemEventHandler
 import os
 import time
 from datetime import datetime, timedelta
+from calculate_file_name import calculate_file_name
 
 class Watcher:
-    DIRECTORY_TO_WATCH = r"C:\Users\backj\OneDrive\Documents\Python"
+    DIRECTORY_TO_WATCH = "/home/mcma/GNSS/INTECH-GNSS-/RawData"
 
     def __init__(self):
         self.observer = Observer()
@@ -88,6 +89,15 @@ class Handler(FileSystemEventHandler):
                     for line in infile:
                         outfile.write(line)
         # Insert into IR processing code here (compiled_file.txt)
+        filename = "compiled_file.txt"
+        QC_filename = "QC_test_file.txt"
+        dynamic = True
+        interpolate = True
+        printFailReasons = False
+        showAllPlots = False
+
+        calcedHeight, time = calculate_file_name(filename, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots)
+        print(calcedHeight, time)
 
     def on_created(self, event):
         if event.is_directory:
@@ -95,7 +105,7 @@ class Handler(FileSystemEventHandler):
 
         elif event.src_path.endswith('.txt'):
             print(f"New .txt file created: {event.src_path}")
-            Handler.compile_recent_files(Watcher.DIRECTORY_TO_WATCH, r'C:\Users\backj\OneDrive\Documents\Python\check_append\compiled_file.txt')
+            Handler.compile_recent_files(Watcher.DIRECTORY_TO_WATCH, 'compiled_file.txt')
 
 if __name__ == "__main__":
     w = Watcher()

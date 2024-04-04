@@ -11,6 +11,9 @@ import numpy as np
 def height_from_SNR(file, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots):
     custom_row_names = ["constellation", "satID", "elevAng", "azAng", "SNR_data", "year", "month", "day", "hour", "min", "sec"]
     df = pd.read_csv(file, sep='\s+', header=None, names=custom_row_names)
+    last_row = df.iloc[-1]
+    last_time = last_row[['year', 'month', 'day', 'hour', 'min', 'sec']]
+    time_returned = [last_time['year'], last_time['month'], last_time['day'], last_time['hour'], last_time['min'], last_time['sec']]
     
     # Convert the time columns to seconds, and save year and day of year 
     df['gpsTime'] = df['hour'] * 3600 + df['min'] * 60 + df['sec']
@@ -106,4 +109,4 @@ def height_from_SNR(file, QC_filename, dynamic, interpolate, printFailReasons, s
     
     height_array = calced_Heights
     
-    return height_array, calculated_h, calculated_hbar, total_height_calls 
+    return height_array, calculated_h, calculated_hbar, total_height_calls, time_returned

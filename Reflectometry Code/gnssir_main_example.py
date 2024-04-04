@@ -5,6 +5,7 @@ def calculate_file_name(filename, dynamic, interpolate, printFailReasons, showAl
     height_array, height, hbar, tot_sats = height_from_SNR(filename, "default", dynamic, interpolate, printFailReasons, showAllPlots)
     percentage_usable_data = round(len(height_array) / tot_sats * 100, 1)
     print(f"For the {filename}, the calculated height was {height}, with an hbar of {hbar}, with a total of {len(height_array)} ({percentage_usable_data}%) satellite arcs passing QC.")
+    return height
 
 #Load in SNR Files
 filename = "02_28_24_QUEC.txt" #Data we collected 

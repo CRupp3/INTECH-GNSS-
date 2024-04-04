@@ -216,163 +216,169 @@ def formatSNR(GNSSid, GSV, ZDA, satnum):
 
     return SNR
 
+def parseNMEA_func():
+    # Get a list of available serial ports
+    ports = serial.tools.list_ports.comports()
+    print(ports[0])
 
-# Get a list of available serial ports
-ports = serial.tools.list_ports.comports()
+    # Check if there are any available ports
+    if ports:
+        port = ports[0].device  # Assume you want to connect to the first available port
 
-# Check if there are any available ports
-if ports:
-    port = ports[0].device  # Assume you want to connect to the first available port
+        try:
+            # Create a serial connection
+            s = serial.Serial(port, 115200, timeout=1)
+            s.write_timeout = 1
+            # Set the line terminator. CR = '\r', LF = '\n'. CR/LF = '\r\n'
+            s.newline = '\r\n'
+            print("Connected to Serial Port")
+        except serial.SerialException as e:
+            print(f"Error opening the serial port: {e}")
+    else:
+        print("No serial ports found.")
+
+    # Creating Commands
+    # End of command
+    CFLF = b'\x0D\x0A'  # Equivalent to hex2dec(["0D", "0A"])
+
+    # Serial Port Startup
+    # @GGNS: Acquire the positioning-use satellite setting
+    GGNS = b'@GGNS' + CFLF
+    # @VER: Firmware revision number acquisition
+    VER = b'@VER' + CFLF
+
+    # Inject Current UTC Time
+    # @GTIM: Time setting
+    utcTime = datetime.now(timezone.utc)
+    GTIM = f'@GTIM {utcTime.year} {utcTime.month} {utcTime.day} {utcTime.hour} {utcTime.minute} {utcTime.second}'.encode() + CFLF
+
+    # Save Backup Data For Hot Start
+    # @BUP: Backup data saving
+    BUP = b'@BUP' + CFLF
+
+    # 1 Pulse Per Second Output Enable
+    # @GPPS: 1PPS output setting
+    GPPS = b'@GPPS 1' + CFLF
+
+    # Idle Mode
+    # @GSTP: Positioning stop
+    GSTP = b'@GSTP' + CFLF
+
+    # Cold Start
+    GCD = b'@GCD' + CFLF
+
+    # Hot Start
+    # @GSR: Hot start
+    GSR = b'@GSR' + CFLF
+
+    # Set Which Satellites will be tracked (for now all of them)
+    # @GNS: Positioning-use satellite setting
+    GNS = f'@GNS 0x{16383:X}'.encode() + CFLF # All satellites
+    # GNS = f'@GNS 0x{257:X}'.encode() + CFLF  # GPS L1L5 -> GP
+    # GNS = f'@GNS 0x{552:X}'.encode() + CFLF  # QZSS L1-C L1-S L5 -> GQ
+    # GNS = f'@GNS 0x{3136:X}'.encode() + CFLF  # Beidou B1 B1C B2A -> GB
+    # GNS = f'@GNS 0x{4224:X}'.encode() + CFLF  # Galileo E1B E5A -> GA
+    # GNS = f'@GNS 0x{1:X}'.encode() + CFLF  # GPS L1 -> GP -> SigID: 1
+    # GNS = f'@GNS 0x{2:X}'.encode() + CFLF  # GLONASS -> GL -> SigID: 1
+    # GNS = f'@GNS 0x{4:X}'.encode() + CFLF  # SBAS -> ? -> SigID: ?
+    # GNS = f'@GNS 0x{8:X}'.encode() + CFLF  # QZSS L1-C/A -> GQ -> SigID: 1
+    # GNS = f'@GNS 0x{32:X}'.encode() + CFLF  # QZSS L1-S -> GQ -> SigID: ?
+    # GNS = f'@GNS 0x{64:X}'.encode() + CFLF  # Beidou B1l -> GB -> SigID: 1
+    # GNS = f'@GNS 0x{128:X}'.encode() + CFLF  # Galileo E1B/C -> GA -> SigID: 7
+    # GNS = f'@GNS 0x{256:X}'.encode() + CFLF  # GPS L5 -> GP -> SigID: 7
+    # GNS = f'@GNS 0x{512:X}'.encode() + CFLF  # QZSS L5 -> GQ -> SigID: 7
+    # GNS = f'@GNS 0x{1024:X}'.encode() + CFLF  # Beidou B1C -> GB -> SigID: 3
+    # GNS = f'@GNS 0x{2048:X}'.encode() + CFLF  # Beidou B2a -> GB -> SigID: 5
+    # GNS = f'@GNS 0x{4096:X}'.encode() + CFLF  # Galileo E5a -> GA -> SigID: 1
+    # GNS = f'@GNS 0x{8192:X}'.encode() + CFLF  # NavIC -> GI -> SigID: 1
+
+    # Set which messages to output
+    # @BSSL: Output sentence select
+    BSSL = f'@BSSL 0x{136:X}'.encode() + CFLF  # ZDA and GSV
+    # BSSL = f'@BSSL 0x{8:X}'.encode() + CFLF  # GSV
+
+    # Execute Commands
+    s.write(GSTP)
+    s.write(GTIM)
+    s.write(GNS)
+    s.write(BSSL)
+    s.write(GSR)
+
+    time.sleep(5)
+
+    # Initialize Counters
+    ZDAcount = 0
+    GSVcount = 0
+    GPScount = 0
+    GLOcount = 0
+    GALcount = 0
+    BDScount = 0
+    QZScount = 0
+    NAVICcount = 0
+    SNRcount = 0
+
+    # Initiate Minute Counter
+    current_min = None
+    prev_min = None
+
+    # Initialize Data Storage
+    ZDA = []
+    GSV = []
+    SNR = []
+
+    print('Start')
+
     try:
-        # Create a serial connection
-        s = serial.Serial(port, 115200, timeout=1)
-        s.write_timeout = 1
-        # Set the line terminator. CR = '\r', LF = '\n'. CR/LF = '\r\n'
-        s.newline = '\r\n'
-        print("Connected to Serial Port")
-    except serial.SerialException as e:
-        print(f"Error opening the serial port: {e}")
-else:
-    print("No serial ports found.")
+        print('Listening for serial data...')
+        while True:
+            line = s.readline().decode('utf-8').strip()  # Read a line from the serial port and decode it
+            # Assuming you want to do something with 'line' here. For example, print it:
+            print(line)
+            # Make sure to include some condition to break out of the loop, or it will run forever.
+            if line:
+                if line.startswith('$'):
+                    GNSSid = line[1:3]
+                    SENTid = line[3:6]
+                    if SENTid == "ZDA":  # ZDA Message
+                        ZDAcount += 1
+                        parsed_data = parseZDA(line, '$', GNSSid, SENTid)
+                        ZDA.append(parsed_data)
+                        # print(f"ZDA Data: {parsed_data}")  # Print parsed ZDA data for debugging
+                        current_min = parsed_data['min']
+                        if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):  # Check for 5 minutes difference, considering hour change
+                            prev_min = current_min
+                            # Use datetime to format filename with date and time for uniqueness
+                            filename = f"{parsed_data['year']} {parsed_data['month']:02d} {parsed_data['day']:02d}_{parsed_data['hour']:02d} {parsed_data['min']:02d}.txt"
+                    elif SENTid == "GSV": # GSV Message
+                        GSVcount += 1
+                        parsed_data,sat1,sat2,sat3,sat4 = parseGSV(line, '$', GNSSid, SENTid)
+                        GSV.append(parsed_data)
+                        if ZDAcount > 0:
+                            with open(filename, 'a') as fid:
+                                # Process each satellite if it has valid data
+                                for sat in [sat1, sat2, sat3, sat4]:
+                                    if sat in [1, 2, 3, 4]:  # Check if satellite number is valid
+                                        SNRcount += 1
+                                        # Assume SNR is a list to store formatted SNR data for each satellite
+                                        SNR.append(formatSNR(GNSSid, GSV[GSVcount-1], ZDA[ZDAcount-1], sat))
+                                        # print(SNR[SNRcount-1])
+                                        # Fetch the latest SNR entry
+                                        snr_data = SNR[SNRcount-1]
+                                        # Prepare data string to write to file
+                                        data_str = f"{snr_data['gnssid']} {snr_data['satid']} {snr_data['elev']} {snr_data['azim']} {snr_data['snr']} {snr_data['year']} {snr_data['month']} {snr_data['day']} {snr_data['hour']} {snr_data['min']} {snr_data['sec']}\r\n"
+                                        # Write the SNR data string to file
+                                        fid.write(data_str)
 
-# Creating Commands
-# End of command
-CFLF = b'\x0D\x0A'  # Equivalent to hex2dec(["0D", "0A"])
+    except KeyboardInterrupt:
+        # Graceful exit on keyboard interrupt (Ctrl+C)
+        print("\nExiting...")
+        print(f"Total ZDA messages: {ZDAcount}")
+        print(f"Total GSV messages: {GSVcount}")
+    finally:
+        # Make sure to close the serial port when done
+        s.close()
+        fid.close()
 
-# Serial Port Startup
-# @GGNS: Acquire the positioning-use satellite setting
-GGNS = b'@GGNS' + CFLF
-# @VER: Firmware revision number acquisition
-VER = b'@VER' + CFLF
 
-# Inject Current UTC Time
-# @GTIM: Time setting
-utcTime = datetime.now(timezone.utc)
-GTIM = f'@GTIM {utcTime.year} {utcTime.month} {utcTime.day} {utcTime.hour} {utcTime.minute} {utcTime.second}'.encode() + CFLF
-
-# Save Backup Data For Hot Start
-# @BUP: Backup data saving
-BUP = b'@BUP' + CFLF
-
-# 1 Pulse Per Second Output Enable
-# @GPPS: 1PPS output setting
-GPPS = b'@GPPS 1' + CFLF
-
-# Idle Mode
-# @GSTP: Positioning stop
-GSTP = b'@GSTP' + CFLF
-
-# Cold Start
-GCD = b'@GCD' + CFLF
-
-# Hot Start
-# @GSR: Hot start
-GSR = b'@GSR' + CFLF
-
-# Set Which Satellites will be tracked (for now all of them)
-# @GNS: Positioning-use satellite setting
-GNS = f'@GNS 0x{16383:X}'.encode() + CFLF # All satellites
-# GNS = f'@GNS 0x{257:X}'.encode() + CFLF  # GPS L1L5 -> GP
-# GNS = f'@GNS 0x{552:X}'.encode() + CFLF  # QZSS L1-C L1-S L5 -> GQ
-# GNS = f'@GNS 0x{3136:X}'.encode() + CFLF  # Beidou B1 B1C B2A -> GB
-# GNS = f'@GNS 0x{4224:X}'.encode() + CFLF  # Galileo E1B E5A -> GA
-# GNS = f'@GNS 0x{1:X}'.encode() + CFLF  # GPS L1 -> GP -> SigID: 1
-# GNS = f'@GNS 0x{2:X}'.encode() + CFLF  # GLONASS -> GL -> SigID: 1
-# GNS = f'@GNS 0x{4:X}'.encode() + CFLF  # SBAS -> ? -> SigID: ?
-# GNS = f'@GNS 0x{8:X}'.encode() + CFLF  # QZSS L1-C/A -> GQ -> SigID: 1
-# GNS = f'@GNS 0x{32:X}'.encode() + CFLF  # QZSS L1-S -> GQ -> SigID: ?
-# GNS = f'@GNS 0x{64:X}'.encode() + CFLF  # Beidou B1l -> GB -> SigID: 1
-# GNS = f'@GNS 0x{128:X}'.encode() + CFLF  # Galileo E1B/C -> GA -> SigID: 7
-# GNS = f'@GNS 0x{256:X}'.encode() + CFLF  # GPS L5 -> GP -> SigID: 7
-# GNS = f'@GNS 0x{512:X}'.encode() + CFLF  # QZSS L5 -> GQ -> SigID: 7
-# GNS = f'@GNS 0x{1024:X}'.encode() + CFLF  # Beidou B1C -> GB -> SigID: 3
-# GNS = f'@GNS 0x{2048:X}'.encode() + CFLF  # Beidou B2a -> GB -> SigID: 5
-# GNS = f'@GNS 0x{4096:X}'.encode() + CFLF  # Galileo E5a -> GA -> SigID: 1
-# GNS = f'@GNS 0x{8192:X}'.encode() + CFLF  # NavIC -> GI -> SigID: 1
-
-# Set which messages to output
-# @BSSL: Output sentence select
-BSSL = f'@BSSL 0x{136:X}'.encode() + CFLF  # ZDA and GSV
-# BSSL = f'@BSSL 0x{8:X}'.encode() + CFLF  # GSV
-
-# Execute Commands
-s.write(GSTP)
-s.write(GTIM)
-s.write(GNS)
-s.write(BSSL)
-s.write(GSR)
-
-time.sleep(5)
-
-# Initialize Counters
-ZDAcount = 0
-GSVcount = 0
-GPScount = 0
-GLOcount = 0
-GALcount = 0
-BDScount = 0
-QZScount = 0
-NAVICcount = 0
-SNRcount = 0
-
-# Initiate Minute Counter
-current_min = None
-prev_min = None
-
-# Initialize Data Storage
-ZDA = []
-GSV = []
-SNR = []
-
-print('Start')
-
-try:
-    print('Listening for serial data...')
-    while True:
-        line = s.readline().decode('utf-8').strip()  # Read a line from the serial port and decode it
-        # Assuming you want to do something with 'line' here. For example, print it:
-        print(line)
-        # Make sure to include some condition to break out of the loop, or it will run forever.
-        if line:
-            if line.startswith('$'):
-                GNSSid = line[1:3]
-                SENTid = line[3:6]
-                if SENTid == "ZDA":  # ZDA Message
-                    ZDAcount += 1
-                    parsed_data = parseZDA(line, '$', GNSSid, SENTid)
-                    ZDA.append(parsed_data)
-                    # print(f"ZDA Data: {parsed_data}")  # Print parsed ZDA data for debugging
-                    current_min = parsed_data['min']
-                    if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):  # Check for 5 minutes difference, considering hour change
-                        prev_min = current_min
-                        # Use datetime to format filename with date and time for uniqueness
-                        filename = f"{parsed_data['year']} {parsed_data['month']:02d} {parsed_data['day']:02d}_{parsed_data['hour']:02d} {parsed_data['min']:02d}.txt"
-                elif SENTid == "GSV": # GSV Message
-                    GSVcount += 1
-                    parsed_data,sat1,sat2,sat3,sat4 = parseGSV(line, '$', GNSSid, SENTid)
-                    GSV.append(parsed_data)
-                    if ZDAcount > 0:
-                        with open(filename, 'a') as fid:
-                            # Process each satellite if it has valid data
-                            for sat in [sat1, sat2, sat3, sat4]:
-                                if sat in [1, 2, 3, 4]:  # Check if satellite number is valid
-                                    SNRcount += 1
-                                    # Assume SNR is a list to store formatted SNR data for each satellite
-                                    SNR.append(formatSNR(GNSSid, GSV[GSVcount-1], ZDA[ZDAcount-1], sat))
-                                    # print(SNR[SNRcount-1])
-                                    # Fetch the latest SNR entry
-                                    snr_data = SNR[SNRcount-1]
-                                    # Prepare data string to write to file
-                                    data_str = f"{snr_data['gnssid']} {snr_data['satid']} {snr_data['elev']} {snr_data['azim']} {snr_data['snr']} {snr_data['year']} {snr_data['month']} {snr_data['day']} {snr_data['hour']} {snr_data['min']} {snr_data['sec']}\r\n"
-                                    # Write the SNR data string to file
-                                    fid.write(data_str)
-                    
-except KeyboardInterrupt:
-    # Graceful exit on keyboard interrupt (Ctrl+C)
-    print("\nExiting...")
-    print(f"Total ZDA messages: {ZDAcount}")
-    print(f"Total GSV messages: {GSVcount}")
-finally:
-    # Make sure to close the serial port when done
-    s.close() 
-    fid.close()
+if __name__ == "__main__":
+    parseNMEA_func()
