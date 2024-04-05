@@ -334,9 +334,9 @@ def parseNMEA_func():
     GSV = []
     SNR = []
 
-    print('Start')
-
     time.sleep(3)
+
+    print('Start')
 
     try:
         # print('Listening for serial data...')
