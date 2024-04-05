@@ -26,6 +26,7 @@ w = Watcher()
 p_parseNMEA_func = Process(target=parseNMEA_func())
 p_Watcher = Process(target=w.run())
 
+print('here')
 p_Watcher.start()
 print('watcher started')
 p_parseNMEA_func.start()
