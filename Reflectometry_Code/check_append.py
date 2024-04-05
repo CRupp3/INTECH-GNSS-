@@ -4,7 +4,7 @@ import os
 import time
 from datetime import datetime, timedelta
 #from calculate_file_name import calculate_file_name
-from Reflectometry_Code.calculate_file_name import calculate_file_name
+from calculate_file_name import calculate_file_name
 from CheckHealth import CheckHealth
 
 class Watcher:
