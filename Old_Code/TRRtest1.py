@@ -60,7 +60,7 @@ while True:
         send_response = send_response.decode()
 
         # log everything
-        file1 = open('SwarmSendLog.txt', 'a')  # open log.txt
+        file1 = open('../SwarmSendLog.txt', 'a')  # open log.txt
         file1.write('Communication that occured at' + strftime("%Y-%m-%d %I:%M:%S %p") + ' message: ' + message + ' formatted message: ' + formatted + 'received things: ' + send_response + '\n')
         file1.close()
 
@@ -79,7 +79,7 @@ while True:
         send_response += swarm.read(data_left)
         send_response = send_response.decode()  # decode message
 
-        file2 = open('SwarmRecievedLog.txt', 'a')
+        file2 = open('../SwarmRecievedLog.txt', 'a')
         file2.write('Checked for messages at ' + strftime("%Y-%m-%d %I:%M:%S %p") + ' and received ' + send_response + '\n')
         file2.close()
 
@@ -104,7 +104,7 @@ while True:
         send_response += swarm.read(data_left)
         send_response = send_response.decode()  # decode message
 
-        file2 = open('SwarmRecievedLog.txt', 'a')
+        file2 = open('../SwarmRecievedLog.txt', 'a')
         file2.write(
             'Checked for messages at ' + strftime("%Y-%m-%d %I:%M:%S %p") + ' and received ' + send_response + '\n')
         file2.close()
