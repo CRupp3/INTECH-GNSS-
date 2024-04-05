@@ -334,7 +334,7 @@ def parseNMEA_func():
     print('Start')
 
     try:
-        print('Listening for serial data...')
+        # print('Listening for serial data...')
         while True:
             line = s.readline().decode('utf-8').strip()  # Read a line from the serial port and decode it
             # Assuming you want to do something with 'line' here. For example, print it:
