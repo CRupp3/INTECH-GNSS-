@@ -15,12 +15,13 @@ from FormatMessage import formatFullSwarmMessage
 from FormatReadNewest import formatReadNewest
 from CheckChargeData import CheckChargeData
 from Message_Parse import Message_Parse
+print('debug -1')
 
 # Import GNSS functions
 from Reflectometry_Code.check_append import Watcher
 from RawData.parseNMEA import parseNMEA_func
 
-
+print('debug  0')
 w = Watcher()
 # start both in parallel
 print('debug 1')
