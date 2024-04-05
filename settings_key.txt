@@ -1,5 +1,5 @@
 #emask_min
-#emas_max
+#emask_max
 #amask_min
 #amask_max
 #e_diff
