@@ -23,15 +23,17 @@ from RawData.parseNMEA import parseNMEA_func
 
 w = Watcher()
 # start both in parallel
+print('debug 1')
 p_parseNMEA_func = Process(target=parseNMEA_func())
+print('debug 1')
 p_Watcher = Process(target=w.run())
 
-print('here')
+print('debug 3')
 p_Watcher.start()
-print('watcher started')
+print('debug 4')
 p_parseNMEA_func.start()
-print('parse started')
 
+print('debug 5')
 # Transmit things
 while True:
     # check uptime
