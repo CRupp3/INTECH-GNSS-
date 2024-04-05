@@ -96,6 +96,7 @@ def parseGSV(line, header, GNSSid, SENTid):
     # Parse ZDA Message
     i = len(header) + len(GNSSid) + len(SENTid) + 2
     arg = 1
+
     while i <= len(line):
         if arg in range(1,21) and Ind[arg-1] != 0:
             segment = line[i-1:i-1+Ind[arg-1]]
