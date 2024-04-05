@@ -1,4 +1,4 @@
-from Reflectometry_Code.height_from_SNR import height_from_SNR
+from height_from_SNR import height_from_SNR
 # from height_from_sat import height_from_sat
 
 def calculate_file_name(filename, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots):

@@ -5,7 +5,7 @@ import pandas as pd
 #from peak2noise import peak2noise
 #from lomb import lomb
 #from get_ofac_hifac import get_ofac_hifac
-from Reflectometry_Code.height_from_sat import height_from_sat
+from height_from_sat import height_from_sat
 import numpy as np
 
 def height_from_SNR(file, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots):

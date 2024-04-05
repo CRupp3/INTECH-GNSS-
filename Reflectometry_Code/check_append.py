@@ -5,7 +5,7 @@ import time
 from datetime import datetime, timedelta
 #from calculate_file_name import calculate_file_name
 from calculate_file_name import calculate_file_name
-from CheckHealth import CheckHealth
+from CheckHealth import (CheckHealth)
 
 class Watcher:
     DIRECTORY_TO_WATCH = "/home/intech/INTECH-GNSS-/RawData"

@@ -1,5 +1,5 @@
 import pandas as pd
-from Reflectometry_Code.read_QC import read_QC
+from read_QC import read_QC
 
 def quality_control_filter(group, QC_filename):
     [emin, emax, ediff, maxHeight, desiredPrecision, frange_0, frange_1, minAmp, minRH, maxArcTime, pknoiseCrit, azmin, azmax] = read_QC(QC_filename)
