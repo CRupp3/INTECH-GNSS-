@@ -27,7 +27,7 @@ def Message_Parse(last_MSG):
     # file_path = 'SwarmRecievedLog.txt'  # hardcode file path for settings.txt
     # last_MSG = get_last_MSG(file_path)
     print("MSG:", last_MSG)
-    print("Compare to:$MM ERR,DBX_NOMORE*5c)
+    print("Compare to:$MM ERR,DBX_NOMORE*5c")
     # check if not error message
     if last_MSG != "$MM ERR,DBX_NOMORE*5c":
         msg_handeler(last_MSG)
