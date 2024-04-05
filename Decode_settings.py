@@ -12,7 +12,7 @@ def read_file_and_assign_values(file_path):
                 current_section = None  # Reset the current section
     return variables
 
-file_path = 'data.txt'  # Replace with the path to your file
+file_path = '/home/mcma/GNSS/INTECH-GNSS-/settings.txt'  # Replace with the path to your file
 variables = read_file_and_assign_values(file_path)
 
 # Accessing the variables

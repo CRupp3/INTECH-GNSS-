@@ -21,17 +21,17 @@ from Reflectometry_Code.check_append import Watcher
 from RawData.parseNMEA import parseNMEA_func
 
 import sys
-# caution: path[0] is reserved for script path (or '' in REPL)
-sys.path.insert(1, '/home/mcma/GNSS/INTECH-GNSS-/Reflectometry_Code')
-sys.path.insert(1, '/home/mcma/GNSS/INTECH-GNSS-/RawData')
-
-w = Watcher()
-# start both in parallel
-p_parseNMEA_func = Process(target=parseNMEA_func())
-p_Watcher = Process(target=w.run())
-
-p_Watcher.start()
-p_parseNMEA_func.start()
+# # caution: path[0] is reserved for script path (or '' in REPL)
+# sys.path.insert(1, '/home/mcma/GNSS/INTECH-GNSS-/Reflectometry_Code')
+# sys.path.insert(1, '/home/mcma/GNSS/INTECH-GNSS-/RawData')
+#
+# w = Watcher()
+# # start both in parallel
+# p_parseNMEA_func = Process(target=parseNMEA_func())
+# p_Watcher = Process(target=w.run())
+#
+# p_Watcher.start()
+# p_parseNMEA_func.start()
 
 
 # Goals:
@@ -54,8 +54,6 @@ from FormatMessage import formatFullSwarmMessage
 from FormatReadNewest import formatReadNewest
 from CheckChargeData import CheckChargeData
 import os
-
-
 
 
 while True:
@@ -85,8 +83,8 @@ while True:
         message_file = open(message_file_path, 'r')
         lines = message_file.readlines()
         # read last 4 lines
-
-        message = formatFullSwarmMessage()  # read from MessageLog.txt
+        message = (lines[-1 - 3].strip() + '-' + lines[-1 - 2].strip() + '-' + lines[-1 - 1].strip() + '-' + lines[
+            -1].strip())
 
         # Send message via Swarm
         swarm = serial.Serial("/dev/ttyS0", 115200)
