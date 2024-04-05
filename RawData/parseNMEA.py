@@ -336,6 +336,8 @@ def parseNMEA_func():
 
     print('Start')
 
+    time.sleep(3)
+
     try:
         # print('Listening for serial data...')
         while True:
