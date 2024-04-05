@@ -16,7 +16,7 @@ def get_last_MSG(file_path):
 # function to handle the message
 def msg_handeler(last_MSG):
     # make the newest message equal to the settings file
-    with open('settings_overwrite.txt', 'w') as file: # hardcode file path for settings.txt
+    with open('settings.txt', 'w') as file: # hardcode file path for settings.txt
 
         file.write(last_MSG)
 
@@ -26,10 +26,10 @@ def msg_handeler(last_MSG):
 def Message_Parse(last_MSG):
     # file_path = 'SwarmRecievedLog.txt'  # hardcode file path for settings.txt
     # last_MSG = get_last_MSG(file_path)
-    print("MSG:", last_MSG)
-    print("Compare to:$MM ERR,DBX_NOMORE*5c")
+    # print("MSG:", last_MSG)
+    # print("Compare to:$MM ERR,DBX_NOMORE*5c\n")
     # check if not error message
-    if last_MSG != "$MM ERR,DBX_NOMORE*5c":
+    if last_MSG != "$MM ERR,DBX_NOMORE*5c\n":
         msg_handeler(last_MSG)
 
 

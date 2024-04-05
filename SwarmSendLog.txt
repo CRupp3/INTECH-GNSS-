@@ -229,3 +229,6 @@ received things: $TD OK,4616874393826*23
 Communication that occured at2024-03-21 04:00:57 PM message: N001 032124 2200 13.600 3.000 4.000 0 formatted message: $TD "N001 032124 2200 13.600 3.000 4.000 0"*64
 received things: $TD OK,4616874393827*22
 
+Communication that occured at2024-04-05 03:55:00 PM message: message3-message4-message5-message6 formatted message: $TD "message3-message4-message5-message6"*19
+received things: $TD OK,4616874885150*27
+

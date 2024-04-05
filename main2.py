@@ -44,11 +44,11 @@ while True:
     if uptime > days*24*60*60:
         os.system('reboot')
 
-    sleep(1)  # sleep 1 minute
-    print(strftime("%S")) # debug message
+    sleep(1*60)  # sleep 1 minute
+    #print(strftime("%S")) # debug message
 
 
-    if strftime("%S") == "00":  # Top of the hour
+    if strftime("%M") == "00":  # Top of the hour
         # print('Top') #debug message
         # Check Charge controller - done
         # Check Temperature - missing
@@ -107,7 +107,7 @@ while True:
 
         swarm.close()
 
-    elif strftime("%S") in ["15", "30", "45"]:  # Not top of hour
+    elif strftime("%M") in ["15", "30", "45"]:  # Not top of hour
         # print('Inner') # debug message
         # record charge controller data - done
         # ask swarm for received messages - done

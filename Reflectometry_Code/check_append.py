@@ -99,13 +99,13 @@ class Handler(FileSystemEventHandler):
         showAllPlots = False
 
         calcedHeight, time = calculate_file_name(filename, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots)
-
+        calcedHeight_string = str(calcedHeight)
         print(calcedHeight, time)
         health_string = CheckHealth(time)
 
         MessageLogPath = '/home/intech/INTECH-GNSS-/MessageLog.txt'
         messagelog = open(MessageLogPath, 'a')
-        messagelog.write('N001' + '-' + time + '-' + calcedHeight + '-' + health_string + '\n')
+        messagelog.write('N001' + '-' + time + '-' + calcedHeight_string + '-' + health_string + '\n')
         messagelog.close()
 
     def on_created(self, event):
