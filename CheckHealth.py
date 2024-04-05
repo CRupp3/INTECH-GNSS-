@@ -8,21 +8,19 @@ from CheckTemperature import CheckTemperature
 
 def CheckHealth(time):
     # Check Charge Data
-    # (voltage_in_volts, power, yield_today) = CheckChargeData()
-    voltage_in_volts = 12.34567
-    power = 1.23456
-    yield_today = 12.34567
+    (voltage_in_volts, power, yield_today) = CheckChargeData()
 
+    # Check CPU temp
     temperature = CheckTemperature()
 
-
     # Get limits from settings
+    # Read from settings
     filepath = '/home/mcma/GNSS/INTECH-GNSS-/settings.txt'
     settingsFile = open(filepath, 'r')
     Lines = settingsFile.readlines()
 
+    # Limits
     voltage_limit = float(Lines[11].strip())
-
     temperature_limit_low = float(Lines[13].strip())
     temperature_limit_high = float(Lines[15].strip())
 

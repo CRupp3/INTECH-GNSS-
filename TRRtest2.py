@@ -1,61 +1,34 @@
-# Matthew Menendez-Aponte
-# Code for TRR System 2 test
+# Full System Code
 
-# Adding a bunch of stuff, including
-#   Full Health Reporting
-#       temperature from CPU temp
-#
-#   Water Level Computation
-#       record raw NMEA messages
-#       save NMEA messages in an organized way
-#       process NMEA messages into height with an associated time
-#
-#   Start from reboot functionality
-
+# Imports
 import time
-from multiprocessing import Process
-
-
-# import parseNMEA and check_append
-from Reflectometry_Code.check_append import Watcher
-from RawData.parseNMEA import parseNMEA_func
-
-import sys
-# # caution: path[0] is reserved for script path (or '' in REPL)
-# sys.path.insert(1, '/home/mcma/GNSS/INTECH-GNSS-/Reflectometry_Code')
-# sys.path.insert(1, '/home/mcma/GNSS/INTECH-GNSS-/RawData')
-#
-# w = Watcher()
-# # start both in parallel
-# p_parseNMEA_func = Process(target=parseNMEA_func())
-# p_Watcher = Process(target=w.run())
-#
-# p_Watcher.start()
-# p_parseNMEA_func.start()
-
-
-# Goals:
-#   - Record and save health data every 15 minutes
-#       - battery voltage
-#       - panel instant power
-#       - panel production over the last day
-#       -
-#   - Transmit a swarm message containing battery info every hour at the top of the hour.
-#   - Record the swarm's responses in a text file
-#   - Listen for swarm messages received
-#   - Save any messages received
-
-# Import things
 import serial
+import sys
 from time import sleep
 from time import strftime
+
+# Import Utility Functions
 from FormatTransmit import formatTransmit
 from FormatMessage import formatFullSwarmMessage
 from FormatReadNewest import formatReadNewest
 from CheckChargeData import CheckChargeData
 import os
+from multiprocessing import Process
+
+# Import GNSS functions
+from Reflectometry_Code.check_append import Watcher
+from RawData.parseNMEA import parseNMEA_func
 
 
+w = Watcher()
+# start both in parallel
+p_parseNMEA_func = Process(target=parseNMEA_func())
+p_Watcher = Process(target=w.run())
+
+p_Watcher.start()
+p_parseNMEA_func.start()
+
+# Transmit things
 while True:
     # check uptime
     uptime = time.clock_gettime(time.CLOCK_MONOTONIC)  # returns uptime in seconds

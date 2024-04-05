@@ -11,9 +11,9 @@
 #volateg_cutoff
 11
 #temp_cutoff_low_celcius
--20 
+-10
 #temp_cutoff_high_celcius
-30
+75
 #sleep_mode_on_bool 
 0 
 #sleep_time_min
