@@ -3,14 +3,16 @@ from watchdog.events import FileSystemEventHandler
 import os
 import time
 from datetime import datetime, timedelta
-from calculate_file_name import calculate_file_name
+#from calculate_file_name import calculate_file_name
+from Reflectometry_Code.calculate_file_name import calculate_file_name
+from CheckHealth import CheckHealth
 
 class Watcher:
     DIRECTORY_TO_WATCH = "/home/mcma/GNSS/INTECH-GNSS-/RawData"
 
     def __init__(self):
         self.observer = Observer()
-        
+
     def print_initial_files(self):
         # List initial .txt files in the directory
         initial_files = [f for f in os.listdir(self.DIRECTORY_TO_WATCH) if f.endswith('.txt')]
@@ -97,7 +99,14 @@ class Handler(FileSystemEventHandler):
         showAllPlots = False
 
         calcedHeight, time = calculate_file_name(filename, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots)
+
         print(calcedHeight, time)
+        health_string = CheckHealth(time)
+
+        MessageLogPath = '/home/mcma/GNSS/INTECH-GNSS-/MessageLog.txt'
+        messagelog = open(MessageLogPath, 'a')
+        messagelog.write('N001' + '-' + time + '-' + calcedHeight + '-' + health_string + '\n')
+        messagelog.close()
 
     def on_created(self, event):
         if event.is_directory:

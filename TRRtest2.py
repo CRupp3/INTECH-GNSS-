@@ -13,6 +13,26 @@
 #   Start from reboot functionality
 
 import time
+from multiprocessing import Process
+
+
+# import parseNMEA and check_append
+from Reflectometry_Code.check_append import Watcher
+from RawData.parseNMEA import parseNMEA_func
+
+import sys
+# caution: path[0] is reserved for script path (or '' in REPL)
+sys.path.insert(1, '/home/mcma/GNSS/INTECH-GNSS-/Reflectometry_Code')
+sys.path.insert(1, '/home/mcma/GNSS/INTECH-GNSS-/RawData')
+
+w = Watcher()
+# start both in parallel
+p_parseNMEA_func = Process(target=parseNMEA_func())
+p_Watcher = Process(target=w.run())
+
+p_Watcher.start()
+p_parseNMEA_func.start()
+
 
 # Goals:
 #   - Record and save health data every 15 minutes
@@ -39,11 +59,9 @@ import os
 
 
 while True:
-
-
     # check uptime
     uptime = time.clock_gettime(time.CLOCK_MONOTONIC)  # returns uptime in seconds
-    days = 7  # reboots every _ days
+    days = 30  # reboots every _ days
     if uptime > days*24*60*60:
         os.system('reboot')
 
@@ -62,7 +80,13 @@ while True:
         # check charge controller
         # format swarm message
         # N001 022824 1949 1.235 2.346 3.457 0
-        message = formatFullSwarmMessage()  # includes a CheckChargeData call which writes to log file
+
+        message_file_path = '/home/mcma/GNSS/INTECH-GNSS-/MessageLog.txt'
+        message_file = open(message_file_path, 'r')
+        lines = message_file.readlines()
+        # read last 4 lines
+
+        message = formatFullSwarmMessage()  # read from MessageLog.txt
 
         # Send message via Swarm
         swarm = serial.Serial("/dev/ttyS0", 115200)

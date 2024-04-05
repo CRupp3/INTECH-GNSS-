@@ -10,7 +10,6 @@
 #       - Sleep Mode On/Off: B
 
 from datetime import datetime, timezone
-from time import strftime
 
 from CheckChargeData import CheckChargeData
 from FormatTransmit import formatTransmit

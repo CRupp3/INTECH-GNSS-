@@ -29,6 +29,7 @@ if __name__ == '__main__':
     p_video = Process(target=capture_video)
     p_data.start()
     p_video.start()
+
     p_data.join()  # wait until acquire_data is done
     p_video.join()  # wait also until capture_video is done
 

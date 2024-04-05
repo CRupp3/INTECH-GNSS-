@@ -1,11 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from read_QC import read_QC
-from quality_control_filter import quality_control_filter
-from get_wavelength import get_wavelength
-from get_ofac_hifac import get_ofac_hifac
-from peak2noise import peak2noise
-from lomb import lomb
+from Reflectometry_Code.read_QC import read_QC
+from Reflectometry_Code.quality_control_filter import quality_control_filter
+from Reflectometry_Code.get_wavelength import get_wavelength
+from Reflectometry_Code.get_ofac_hifac import get_ofac_hifac
+from Reflectometry_Code.peak2noise import peak2noise
+from Reflectometry_Code.lomb import lomb
 
 def height_from_sat(group, QC_filename, dynamic, year, doy, interpolate, printFailReasons, showAllPlots):
     # Obtain the QC parameters
