@@ -4,8 +4,9 @@ import time
 
 def CheckTemperature():
     ser = serial
-    temperature = CPUTemperature()
-    return temperature
+    cpu = CPUTemperature()
+    temp = cpu.temperature
+    return temp
 
 if __name__ == '__main__':
     temp = CheckTemperature()
