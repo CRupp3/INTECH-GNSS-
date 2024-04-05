@@ -92,7 +92,7 @@ class Handler(FileSystemEventHandler):
                         outfile.write(line)
         # Insert into IR processing code here (compiled_file.txt)
         filename = "compiled_file.txt"
-        QC_filename = '/home/intech/INTECH-GNSS-/Settings.txt'
+        QC_filename = '/home/intech/INTECH-GNSS-/settings.txt'
         dynamic = True
         interpolate = True
         printFailReasons = False
