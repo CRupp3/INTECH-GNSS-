@@ -149,7 +149,7 @@ def parseGSV(line, header, GNSSid, SENTid):
             arg += 1
         elif arg == 21 and Ind[arg-1] != 0:
             checkVal = line[i-1:i-1+Ind[arg-1]]
-            GSV['checksum'] = int(checkVal.strip(), 16)
+            GSV['checksum'] = checkVal.strip()
             i += Ind[arg-1] + 1
             arg += 1
         else:
