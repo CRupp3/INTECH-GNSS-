@@ -25,13 +25,14 @@ w = Watcher()
 # start both in parallel
 print('debug 1')
 p_parseNMEA_func = Process(target=parseNMEA_func())
+
 print('debug 1')
 p_Watcher = Process(target=w.run())
 
 print('debug 3')
-p_Watcher.start()
+#p_Watcher.start()
 print('debug 4')
-p_parseNMEA_func.start()
+#p_parseNMEA_func.start()
 
 print('debug 5')
 # Transmit things
