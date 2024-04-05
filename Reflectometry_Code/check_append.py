@@ -8,7 +8,7 @@ from Reflectometry_Code.calculate_file_name import calculate_file_name
 from CheckHealth import CheckHealth
 
 class Watcher:
-    DIRECTORY_TO_WATCH = "/home/mcma/GNSS/INTECH-GNSS-/RawData"
+    DIRECTORY_TO_WATCH = "/home/intech/INTECH-GNSS-/RawData"
 
     def __init__(self):
         self.observer = Observer()
@@ -103,7 +103,7 @@ class Handler(FileSystemEventHandler):
         print(calcedHeight, time)
         health_string = CheckHealth(time)
 
-        MessageLogPath = '/home/mcma/GNSS/INTECH-GNSS-/MessageLog.txt'
+        MessageLogPath = '/home/intech/INTECH-GNSS-/MessageLog.txt'
         messagelog = open(MessageLogPath, 'a')
         messagelog.write('N001' + '-' + time + '-' + calcedHeight + '-' + health_string + '\n')
         messagelog.close()

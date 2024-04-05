@@ -53,7 +53,7 @@ while True:
         # format swarm message
         # N001 022824 1949 1.235 2.346 3.457 0
 
-        message_file_path = '/home/mcma/GNSS/INTECH-GNSS-/MessageLog.txt'
+        message_file_path = '/home/intech/INTECH-GNSS-/MessageLog.txt'
         message_file = open(message_file_path, 'r')
         lines = message_file.readlines()
         # read last 4 lines

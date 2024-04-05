@@ -15,7 +15,7 @@ def CheckHealth(time):
 
     # Get limits from settings
     # Read from settings
-    filepath = '/home/mcma/GNSS/INTECH-GNSS-/settings.txt'
+    filepath = '/home/intech/INTECH-GNSS-/settings.txt'
     settingsFile = open(filepath, 'r')
     Lines = settingsFile.readlines()
 
