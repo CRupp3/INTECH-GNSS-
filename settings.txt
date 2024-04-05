@@ -1,11 +1,11 @@
 #emask_min
 5
 #emas_max
-25
+20
 #amask_min
-10 
+100
 #amask_max
-120
+260
 #e_diff
 5 
 #volateg_cutoff
