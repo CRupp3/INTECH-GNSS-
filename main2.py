@@ -21,22 +21,22 @@ print('debug -1')
 from Reflectometry_Code.check_append import Watcher
 from RawData.parseNMEA import parseNMEA_func
 
-print('debug  0')
-w = Watcher()
-# start both in parallel
-print('debug 1')
-p_parseNMEA_func = Process(target=parseNMEA_func())
-
-print('debug 2')
-p_Watcher = Process(target=w.run())
-
-print('debug 3')
-#p_Watcher.start()
-print('debug 4')
-#p_parseNMEA_func.start()
-
-print('debug 5')
-# Transmit things
+# print('debug  0')
+# w = Watcher()
+# # start both in parallel
+# print('debug 1')
+# p_parseNMEA_func = Process(target=parseNMEA_func())
+#
+# print('debug 2')
+# p_Watcher = Process(target=w.run())
+#
+# print('debug 3')
+# #p_Watcher.start()
+# print('debug 4')
+# #p_parseNMEA_func.start()
+#
+# print('debug 5')
+# # Transmit things
 while True:
     # check uptime
     uptime = time.clock_gettime(time.CLOCK_MONOTONIC)  # returns uptime in seconds
