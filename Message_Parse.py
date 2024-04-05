@@ -16,7 +16,7 @@ def get_last_MSG(file_path):
 # function to handle the message
 def msg_handeler(last_MSG):
     # make the newest message equal to the settings file
-    with open('settings.txt', 'w') as file: # hardcode file path for settings.txt
+    with open('settings_overwrite.txt', 'w') as file: # hardcode file path for settings.txt
 
         file.write(last_MSG)
 
