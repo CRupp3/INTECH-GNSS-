@@ -27,7 +27,9 @@ p_parseNMEA_func = Process(target=parseNMEA_func())
 p_Watcher = Process(target=w.run())
 
 p_Watcher.start()
+print('watcher started')
 p_parseNMEA_func.start()
+print('parse started')
 
 # Transmit things
 while True:
