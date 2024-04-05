@@ -105,6 +105,7 @@ def parseGSV(line, header, GNSSid, SENTid):
                 value = int(segment.strip())
             except ValueError:
                 print(f"Error converting to int. Segment: '{segment}', Type: {type(segment)} at arg {arg}, full line: '{line}'")
+                continue
             if arg == 1:
                 GSV['totS'] = value
             elif arg == 2:
