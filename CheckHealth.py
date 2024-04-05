@@ -20,9 +20,9 @@ def CheckHealth(time):
     Lines = settingsFile.readlines()
 
     # Limits
-    voltage_limit = float(Lines[11].strip())
-    temperature_limit_low = float(Lines[13].strip())
-    temperature_limit_high = float(Lines[15].strip())
+    voltage_limit = float(Lines[5].strip())
+    temperature_limit_low = float(Lines[6].strip())
+    temperature_limit_high = float(Lines[7].strip())
 
 
     # decide if sleep mode is needed

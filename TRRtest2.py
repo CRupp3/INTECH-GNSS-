@@ -6,14 +6,15 @@ import serial
 import sys
 from time import sleep
 from time import strftime
+import os
+from multiprocessing import Process
 
 # Import Utility Functions
 from FormatTransmit import formatTransmit
 from FormatMessage import formatFullSwarmMessage
 from FormatReadNewest import formatReadNewest
 from CheckChargeData import CheckChargeData
-import os
-from multiprocessing import Process
+from Message_Parse import Message_Parse
 
 # Import GNSS functions
 from Reflectometry_Code.check_append import Watcher
@@ -91,6 +92,8 @@ while True:
         send_response += swarm.read(data_left)
         send_response = send_response.decode()  # decode message
 
+        Message_Parse(send_response)
+
         file2 = open('SwarmRecievedLog.txt', 'a')
         file2.write('Checked for messages at ' + strftime("%Y-%m-%d %I:%M:%S %p") + ' and received ' + send_response + '\n')
         file2.close()
@@ -115,6 +118,8 @@ while True:
         data_left = swarm.in_waiting
         send_response += swarm.read(data_left)
         send_response = send_response.decode()  # decode message
+
+        Message_Parse(send_response)
 
         file2 = open('SwarmRecievedLog.txt', 'a')
         file2.write(
