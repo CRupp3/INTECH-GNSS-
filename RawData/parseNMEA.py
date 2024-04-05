@@ -101,7 +101,7 @@ def parseGSV(line, header, GNSSid, SENTid):
         if arg in range(1,21) and Ind[arg-1] != 0:
             segment = line[i-1:i-1+Ind[arg-1]]
             try:
-                value = int(segment)
+                value = int(segment.strip())
             except ValueError:
                 print(f"Error converting to int. Segmment: '{segment}' at arg {arg}, full line: '{line}'")
             if arg == 1:
