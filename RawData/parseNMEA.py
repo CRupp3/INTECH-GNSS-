@@ -340,7 +340,7 @@ def parseNMEA_func():
         while True:
             line = s.readline().decode('utf-8').strip()  # Read a line from the serial port and decode it
             # Assuming you want to do something with 'line' here. For example, print it:
-            # print(line)
+            print(line)
             # Make sure to include some condition to break out of the loop, or it will run forever.
             if line:
                 if line.startswith('$'):
