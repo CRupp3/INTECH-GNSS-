@@ -11,6 +11,12 @@ import numpy as np
 def height_from_SNR(file, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots):
     custom_row_names = ["constellation", "satID", "elevAng", "azAng", "SNR_data", "year", "month", "day", "hour", "min", "sec"]
     df = pd.read_csv(file, sep='\s+', header=None, names=custom_row_names)
+
+    # Check if the DataFrame is empty
+    if df.empty:
+        print("Error: Input file is empty")
+        return None, None, None, None, None  # Return None values for height_array, calculated_h, calculated_hbar, total_height_calls, time_returned
+    
     last_row = df.iloc[-1]
     last_time = last_row[['year', 'month', 'day', 'hour', 'min', 'sec']]
     time_returned = [last_time['year'], last_time['month'], last_time['day'], last_time['hour'], last_time['min'], last_time['sec']]
