@@ -232,3 +232,52 @@ received things: $TD OK,4616874393827*22
 Communication that occured at2024-04-05 03:55:00 PM message: message3-message4-message5-message6 formatted message: $TD "message3-message4-message5-message6"*19
 received things: $TD OK,4616874885150*27
 
+Communication that occured at2024-04-06 11:00:50 AM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $TD OK,4616874950709*24
+
+Communication that occured at2024-04-06 12:00:43 PM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $TD OK,4616874950713*2f
+
+Communication that occured at2024-04-06 01:00:48 PM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $TD OK,4616874950718*24
+
+Communication that occured at2024-04-06 02:00:54 PM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $TD OK,4616874950726*29
+
+Communication that occured at2024-04-06 08:49:57 PM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $M138 ERROR,configASSERT() called from file ./swarm/swarm.c, line 925 at 1712553447 seconds*11
+
+Communication that occured at2024-04-07 07:49:48 AM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $M138 ERROR,configASSERT() called from file ./swarm/swarm.c, line 925 at 1712593037 seconds*1e
+
+Communication that occured at2024-04-07 08:00:04 AM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $TD OK,4616874983425*27
+
+Communication that occured at2024-04-07 09:00:09 AM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $TD OK,4616874983432*21
+
+Communication that occured at2024-04-07 10:00:15 AM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $TD OK,4616874983450*25
+
+Communication that occured at2024-04-07 11:00:21 AM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $M138 BOOT,DEVICEID,DI=0x0032f3*78
+$M138 BOOT,RUNNING*2a
+
+Communication that occured at2024-04-07 12:00:26 PM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $TD OK,4616874983425*27
+
+Communication that occured at2024-04-07 01:00:31 PM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $TD OK,4616874983428*2a
+
+Communication that occured at2024-04-07 02:00:36 PM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $TD OK,4616874983429*2b
+
+Communication that occured at2024-04-07 03:00:42 PM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $TD OK,4616874983430*23
+
+Communication that occured at2024-04-08 01:09:54 AM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $M138 ERROR,configASSERT() called from file ./swarm/swarm.c, line 925 at 1712655443 seconds*10
+
+Communication that occured at2024-04-09 05:00:57 PM message: message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0 formatted message: $TD "message5-message6N001-2024, 4, 5, 20, 50, 13-None-11.58-0.00-52.08-0-N001-2024, 4, 5, 20, 59, 59-None-11.58-0.00-52.62-0-N001-2024, 4, 5, 21, 14, 59-None-11.58-0.00-51.54-0"*65
+received things: $TD OK,4616875016198*20
+
