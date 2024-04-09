@@ -37,19 +37,6 @@ class Watcher:
         self.observer.join()
 
 class Handler(FileSystemEventHandler):
-
-    # @staticmethod
-    # def compile_recent_files(directory, output_file):
-    #     files = [f for f in os.listdir(directory) if f.endswith('.txt')]
-    #     files.sort(key=lambda x: os.path.getmtime(os.path.join(directory, x)), reverse=True)
-    #     recent_files = files[:min(len(files), 8)]
-    #     with open(output_file, 'w') as outfile:
-    #         print("Adding files to output:")
-    #         for fname in recent_files:
-    #             print(fname)
-    #             with open(os.path.join(directory, fname)) as infile:
-    #                 for line in infile:
-    #                     outfile.write(line)
                         
     @staticmethod
     def extract_datetime_from_filename(filename):
@@ -63,10 +50,7 @@ class Handler(FileSystemEventHandler):
     @staticmethod
     def compile_recent_files(directory, output_file):
         all_files = [f for f in os.listdir(directory) if f.endswith('.txt')]
-        # Extract datetime information from filenames
-        files_with_datetime = [(f, Handler.extract_datetime_from_filename(f)) for f in all_files]
-        # Filter out files where the datetime could not be parsed
-        files_with_datetime = [f for f in files_with_datetime if f[1] is not None]
+        files_with_datetime = [(f, Handler.extract_datetime_from_filename(f)) for f in all_files if Handler.extract_datetime_from_filename(f) is not None]
 
         if not files_with_datetime:
             print("No valid files found.")
@@ -75,21 +59,35 @@ class Handler(FileSystemEventHandler):
         # Sort files by datetime, most recent first
         files_with_datetime.sort(key=lambda x: x[1], reverse=True)
 
-        # Determine the 2-hour window based on the most recent file's datetime
+        # The most recent file's datetime determines the two-hour window
         most_recent_time = files_with_datetime[0][1]
         two_hours_ago = most_recent_time - timedelta(hours=2)
 
-        # Filter files within the last 2 hours
-        recent_files = [f for f in files_with_datetime if f[1] >= two_hours_ago][:8]
+        # Filter files within the last 2 hours and ensure they are not empty
+        recent_files_with_content = []
+        for filename, file_datetime in files_with_datetime:
+            if file_datetime < two_hours_ago or len(recent_files_with_content) >= 8:
+                break  # Stop if the file is outside the 2-hour window or we have enough files
 
-        # Write the contents of the filtered files into the output file
+            filepath = os.path.join(directory, filename)
+            with open(filepath, 'r') as file:
+                first_char = file.read(1)
+                if first_char:  # File is not empty
+                    file.seek(0)  # Rewind to start
+                    content = first_char + file.read()  # Ensure we get all content
+                    recent_files_with_content.append((filename, content))
+
+        if not recent_files_with_content:
+            print("No non-empty files found in the last 2 hours.")
+            return
+
+        # Files are already in reverse chronological order, but we limited selection by the two-hour window correctly this time
         with open(output_file, 'w') as outfile:
-            print("Adding files to output:")
-            for fname, _ in recent_files:
+            print("Adding files to output in chronological order:")
+            for fname, content in reversed(recent_files_with_content):  # Reverse to chronological order
                 print(fname)
-                with open(os.path.join(directory, fname)) as infile:
-                    for line in infile:
-                        outfile.write(line)
+                outfile.write(content)
+        
         # Insert into IR processing code here (compiled_file.txt)
         filename = "compiled_file.txt"
         QC_filename = '/home/intech/INTECH-GNSS-/settings.txt'
