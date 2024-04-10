@@ -59,7 +59,13 @@ def parseZDA(line, header, GNSSid, SENTid):
                 i += Ind[arg-1] + 1
                 arg += 1
             elif arg == 7 and Ind[arg-1] != 0:
-                ZDA['checksum'] = int(line[i-1:i-1+Ind[arg-1]],16)
+                segment = line[i-1:i-1+Ind[arg-1]]
+                try: 
+                    value = int(segment.strip(),16)
+                except ValueError:
+                    print(f"ZDA Error converting to int. Segment: '{segment}', Type: {type(segment)} at arg {arg}, full line: '{line}'")
+                    value = 0
+                ZDA['checksum'] = value
                 i += Ind[arg-1] + 1
                 arg += 1
             else:
@@ -161,7 +167,13 @@ def parseGSV(line, header, GNSSid, SENTid):
                 i += Ind[arg-1] + 1
                 arg += 1
             elif arg == 21 and Ind[arg-1] != 0:
-                GSV['checksum'] = int(line[i-1:i-1+Ind[arg-1]],16)
+                segment = line[i-1:i-1+Ind[arg-1]]
+                try: 
+                    value = int(segment.strip(),16)
+                except ValueError:
+                    print(f"GSV Error converting to int. Segment: '{segment}', Type: {type(segment)} at arg {arg}, full line: '{line}'")
+                    value = 0
+                GSV['checksum'] = value
                 i += Ind[arg-1] + 1
                 arg += 1
             else:
@@ -385,13 +397,15 @@ try:
                         ZDA.append(parsed_data)
                     # Logic to Save and Rename File every 15 minutes
                     current_min = parsed_data['min']
-                    if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):  
+                    if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):
+                    #if prev_min is None or (current_min in [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] and current_min != prev_min):  
                         if prev_min is not None:
                             new_filename = f"{parsed_data['year']} {parsed_data['month']:02d} {parsed_data['day']:02d}_{parsed_data['hour']:02d} {current_min:02d}.txt"
                             try:
                                 if os.path.exists(filename):  # Check if 'current.txt' exists
                                     os.rename(filename, new_filename)
                                     print(f"New File: {new_filename}")
+                                    s.flushInput() # Clear the input buffer of the serial object (s)
                             except Exception as e:
                                 print(f"Error renaming file: {e}")
                         prev_min = current_min
@@ -409,10 +423,18 @@ try:
                                     SNRcount += 1
                                     # SNR.append(formatSNR(GNSSid, GSV[GSVcount-1], ZDA[ZDAcount-1], sat))
                                     # snr_data = SNR[SNRcount-1]
-                                    snr_data = formatSNR(GNSSid, GSV[GSVcount-1], ZDA[ZDAcount-1], sat)
-                                    SNR.append(snr_data)
-                                    data_str = f"{snr_data['gnssid']} {snr_data['satid']} {snr_data['elev']} {snr_data['azim']} {snr_data['snr']} {snr_data['year']} {snr_data['month']} {snr_data['day']} {snr_data['hour']} {snr_data['min']} {snr_data['sec']}\r\n"
-                                    fid.write(data_str)            
+                                    try:
+                                        snr_data = formatSNR(GNSSid, GSV[GSVcount-1], ZDA[ZDAcount-1], sat)
+                                        SNR.append(snr_data)
+                                        data_str = f"{snr_data['gnssid']} {snr_data['satid']} {snr_data['elev']} {snr_data['azim']} {snr_data['snr']} {snr_data['year']} {snr_data['month']} {snr_data['day']} {snr_data['hour']} {snr_data['min']} {snr_data['sec']}\r\n"
+                                        fid.write(data_str)
+                                    except IndexError:
+                                        print("Error: Index out of bounds. Skipping data processing for this item.")
+                                    except KeyError:
+                                        print("Error: Missing key in snr_data. Skipping data processing for this item.")
+                                    except Exception as e:
+                                        # Catch other potential errors and print a generic message or the exception
+                                        print(f"An error occurred: {str(e)}. Skipping data processing for this item.")
 except KeyboardInterrupt: # (Ctrl+C)
     print("\nExiting...")
     print(f"Total ZDA messages: {ZDAcount}")
