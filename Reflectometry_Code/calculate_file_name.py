@@ -3,7 +3,8 @@ from height_from_SNR import height_from_SNR
 
 def calculate_file_name(filename, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots):
     # Call height_from_SNR function to get required data
-    height_array, height, hbar, tot_sats, time = height_from_SNR(filename, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots)
+    start_time = time.time() 
+    height_array, height, hbar, tot_sats, time_returned = height_from_SNR(filename, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots)
 
     # Check for errors in height_from_SNR function
     if height_array is None:
@@ -20,19 +21,22 @@ def calculate_file_name(filename, QC_filename, dynamic, interpolate, printFailRe
     print(f"For the {filename}, the calculated height was {height}, with an hbar of {hbar}, with a total of {len(height_array)} ({percentage_usable_data}%) satellite arcs passing QC.")
     
     # Convert time to formatted string
-    time = [int(item) for item in time]
+    time_returned = [int(item) for item in time_returned]
     # Ensure time has at least 6 elements
-    if len(time) < 6:
+    if len(time_returned) < 6:
         print("Error: Invalid time format")
         return None, None  # Return None values to indicate failure
     
     # Format each component with leading zeros if necessary
     formatted_time = [
         str(component).zfill(2) if index != 0 else str(component)[2:]  # For the year, only take the last two digits
-        for index, component in enumerate(time)
+        for index, component in enumerate(time_returned)
     ]
     # Concatenate the formatted components into the desired string format
     stringtime = ''.join(formatted_time)
+    
+    tot_time = time.time() - start_time
+    print("Calculating the height took: %s" % str(tot_time))
     
     # Return calculated height and formatted time
     return height, stringtime
