@@ -11,6 +11,7 @@ import numpy as np
 def height_from_SNR(file, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots):
     custom_row_names = ["constellation", "satID", "elevAng", "azAng", "SNR_data", "year", "month", "day", "hour", "min", "sec"]
     df = pd.read_csv(file, sep='\s+', header=None, names=custom_row_names)
+    df = df.dropna() #Remove any rows with NaN data
 
     # Check if the DataFrame is empty
     if df.empty:
