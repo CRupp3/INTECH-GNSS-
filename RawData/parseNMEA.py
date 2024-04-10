@@ -4,6 +4,14 @@ import time
 import os
 from datetime import datetime, timezone
 
+def find_start_of_message(serial_port):
+    buffer = b''
+    while True:
+        byte = serial_port.read(1)
+        buffer += byte
+        if buffer.endswith(b'\x0D\x0A'):  # Check if the end matches the CFLF sequence
+            break  # Found the end of a message, and potentially the start of a new one
+
 def parseZDA(line, header, GNSSid, SENTid):
 
     # Initialize ZDA
@@ -378,6 +386,7 @@ try:
     print('Listening for serial data...')
     filename = 'current.txt'
     while True:
+        find_start_of_message(s)  # Ensure we're at the start of a new message
         try:
             line = s.readline().decode('utf-8').strip() # Read a line from the serial port and decode it
         except UnicodeDecodeError:
