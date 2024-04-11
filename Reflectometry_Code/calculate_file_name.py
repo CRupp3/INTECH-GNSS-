@@ -1,5 +1,6 @@
-from height_from_SNR import height_from_SNR
+from height_from_SNR import (height_from_SNR)
 # from height_from_sat import height_from_sat
+import time
 
 def calculate_file_name(filename, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots):
     # Call height_from_SNR function to get required data
