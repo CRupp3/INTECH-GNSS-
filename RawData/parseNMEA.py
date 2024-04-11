@@ -415,7 +415,7 @@ try:
                             try:
                                 if os.path.exists(filename):  # Check if 'current.txt' exists
                                     os.rename(filename, new_filename)
-                                    print(f"New File: {new_filename}")
+                                    # print(f"New File: {new_filename}")
                                     s.flushInput() # Clear the input buffer of the serial object (s)
                             except Exception as e:
                                 print(f"Error renaming file: {e}")
