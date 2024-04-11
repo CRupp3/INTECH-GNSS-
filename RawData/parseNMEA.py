@@ -7,11 +7,17 @@ from datetime import datetime, timezone
 
 def find_start_of_message(serial_port):
     buffer = b''
+    max_buffer_size = 1024  # Limit the buffer to 1024 bytes to prevent overflow
     while True:
+        if len(buffer) > max_buffer_size:
+            buffer = b''  # Clear buffer if max size exceeded
+            continue  # Skip to next byte without processing overflowing buffer
         byte = serial_port.read(1)
+        if not byte:
+            raise IOError("Serial port read timeout or disconnection")
         buffer += byte
-        if buffer.endswith(b'\x0D\x0A'):  # Check if the end matches the CFLF sequence
-            break  # Found the end of a message, and potentially the start of a new one
+        if buffer.endswith(b'\x0D\x0A'):
+            break  # Found the end of a message, return to avoid processing partial data
 
 def parseZDA(line, header, GNSSid, SENTid):
 
@@ -388,12 +394,16 @@ try:
     print('Listening for serial data...')
     filename = 'current.txt'
     while True:
-        find_start_of_message(s)  # Ensure we're at the start of a new message
         try:
-            line = s.readline().decode('utf-8').strip() # Read a line from the serial port and decode it
+            line = s.readline().decode('utf-8').strip()  # Attempt to read and decode a line
         except UnicodeDecodeError:
-            print("Error decoding line. Skipping faulty data.")
-            continue  # Skip the rest of the loop iteration and try reading the next line
+            # On decode error, attempt to re-synchronize with the start of the next message
+            find_start_of_message(s)
+            try:
+                line = s.readline().decode('utf-8').strip()  # Try to read and decode again
+            except UnicodeDecodeError:
+                print("Error decoding line. Skipping faulty data.")
+                continue  # If it still fails, skip this iteration
         if print_sentences == 1:
             print(line)
         if line:
@@ -417,7 +427,7 @@ try:
                                     os.rename(filename, new_filename)
                                     if print_sentences == 0:
                                         print(f"New File: {new_filename}")
-                                    s.flushInput() # Clear the input buffer of the serial object (s)
+                                    #s.flushInput() # Clear the input buffer of the serial object (s)
                             except Exception as e:
                                 print(f"Error renaming file: {e}")
                         prev_min = current_min
