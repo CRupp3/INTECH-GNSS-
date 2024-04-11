@@ -43,7 +43,7 @@ class Handler(FileSystemEventHandler):
         # Assuming the format is 'YYYY MM DD_HH MM.txt'
         try:
             datetime_part = filename[:-4]  # Remove the '.txt' extension
-            return datetime.strptime(datetime_part, "%Y %m %d_%H %M")
+            return datetime.strptime(datetime_part, "%Y_%m_%d_%H_%M")
         except ValueError:
             return None
 
