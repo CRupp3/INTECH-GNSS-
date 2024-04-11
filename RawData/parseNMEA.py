@@ -2,6 +2,7 @@ import serial
 import serial.tools.list_ports
 import time
 import os
+import sys
 from datetime import datetime, timezone
 
 def find_start_of_message(serial_port):
@@ -354,6 +355,7 @@ BDScount = 0
 QZScount = 0
 NAVICcount = 0
 SNRcount = 0
+lastZDAcount = 0
 
 # Initiate Minute Counter
 current_min = None
@@ -406,10 +408,10 @@ try:
                         ZDA.append(parsed_data)
                     # Logic to Save and Rename File every 15 minutes
                     current_min = parsed_data['min']
-                    if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):
-                    #if prev_min is None or (current_min in [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] and current_min != prev_min):  
+                    #if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):
+                    if prev_min is None or (current_min in [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] and current_min != prev_min):  
                         if prev_min is not None:
-                            new_filename = f"{parsed_data['year']} {parsed_data['month']:02d} {parsed_data['day']:02d}_{parsed_data['hour']:02d} {current_min:02d}.txt"
+                            new_filename = f"{parsed_data['year']}_{parsed_data['month']:02d}_{parsed_data['day']:02d}_{parsed_data['hour']:02d}_{current_min:02d}.txt"
                             try:
                                 if os.path.exists(filename):  # Check if 'current.txt' exists
                                     os.rename(filename, new_filename)
@@ -444,6 +446,10 @@ try:
                                     except Exception as e:
                                         # Catch other potential errors and print a generic message or the exception
                                         print(f"An error occurred: {str(e)}. Skipping data processing for this item.")
+        if lastZDAcount != ZDAcount and print_sentences == 0:
+            sys.stdout.write(f"\rTotal ZDA messages: {ZDAcount} | Total GSV messages: {GSVcount} | Total SNR Messages: {SNRcount}")
+            sys.stdout.flush()
+            lastZDAcount = ZDAcount
 except KeyboardInterrupt: # (Ctrl+C)
     print("\nExiting...")
     print(f"Total ZDA messages: {ZDAcount}")
