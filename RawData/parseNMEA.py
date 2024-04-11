@@ -367,15 +367,15 @@ GSV = []
 SNR = []
 
 # Ask user if they want to print NMEA messages to terminal
-print("Do you want to print all NMEA sentences? (1 for Yes, 0 for No)")
-user_input = input()  # Capture the user's response
+print("Do you want to print NMEA sentences? (2 for sentence counters, 1 for all NMEA Sentences, 0 for No)")
+user_input = input()  
 try:
     print_sentences = int(user_input)
-    if print_sentences not in [0, 1]:
+    if print_sentences not in [0, 1, 2]:
         raise ValueError("Invalid input")
 except ValueError:
-    print("Invalid input. Please enter 1 for Yes or 0 for No.")
-    exit()  # Exit the program if the input is not valid
+    print("Invalid input. Please enter 0,1, or 2.")
+    exit()  
     
 # Check if current.txt exists and if it does clear its contents 
 filename = 'current.txt'
@@ -415,7 +415,8 @@ try:
                             try:
                                 if os.path.exists(filename):  # Check if 'current.txt' exists
                                     os.rename(filename, new_filename)
-                                    # print(f"New File: {new_filename}")
+                                    if print_sentences == 0:
+                                        print(f"New File: {new_filename}")
                                     s.flushInput() # Clear the input buffer of the serial object (s)
                             except Exception as e:
                                 print(f"Error renaming file: {e}")
@@ -446,7 +447,7 @@ try:
                                     except Exception as e:
                                         # Catch other potential errors and print a generic message or the exception
                                         print(f"An error occurred: {str(e)}. Skipping data processing for this item.")
-        if lastZDAcount != ZDAcount and print_sentences == 0:
+        if lastZDAcount != ZDAcount and print_sentences == 2:
             sys.stdout.write(f"\rTotal ZDA messages: {ZDAcount} | Total GSV messages: {GSVcount} | Total SNR Messages: {SNRcount}")
             sys.stdout.flush()
             lastZDAcount = ZDAcount
