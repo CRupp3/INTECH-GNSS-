@@ -18,6 +18,21 @@ def find_start_of_message(serial_port):
         buffer += byte
         if buffer.endswith(b'\x0D\x0A'):
             break  # Found the end of a message, return to avoid processing partial data
+        
+def reset_serial_connection(port, baud_rate=115200, timeout=1):
+    try:
+        if port.isOpen():
+            port.close()
+        port.open()
+        port.baudrate = baud_rate
+        port.timeout = timeout
+        port.write_timeout = timeout
+        port.newline = '\r\n'
+        print("Serial port reset successfully.")
+        return port
+    except serial.SerialException as e:
+        print(f"Error resetting the serial port: {e}")
+        return None
 
 def parseZDA(line, header, GNSSid, SENTid):
 
@@ -363,6 +378,10 @@ NAVICcount = 0
 SNRcount = 0
 lastZDAcount = 0
 
+# Initialize Decode Error Counter
+error_count = 0
+max_errors = 100  
+
 # Initiate Minute Counter
 current_min = None
 prev_min = None
@@ -396,8 +415,16 @@ try:
     while True:
         try:
             line = s.readline().decode('utf-8').strip()  # Attempt to read and decode a line
+            error_count = 0  # Reset error count on successful read            
         except UnicodeDecodeError:
-            # On decode error, attempt to re-synchronize with the start of the next message
+            error_count += 1
+            if error_count >= max_errors:
+                print(f"Too many consecutive decode errors. Attempting to reset serial port...")
+                s = reset_serial_connection(s)  # Attempt to reset the connection
+                if s is None:
+                    print("Failed to reset serial port. Exiting...")
+                    break  # Exit the loop if we cannot reset
+                error_count = 0  # Reset error count after resetting the port
             find_start_of_message(s)
             try:
                 line = s.readline().decode('utf-8').strip()  # Try to read and decode again
