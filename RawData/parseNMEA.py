@@ -38,7 +38,7 @@ def reset_serial_connection(s, retry=3):
             s.close()
             time.sleep(1)
             s.open()
-            print("Serial port reset successfully on attempt", attempt + 1)
+            # print("Serial port reset successfully on attempt", attempt + 1)
             return s
         except serial.SerialException as e:
             print(f"Attempt {attempt + 1}: Failed to reset the serial connection: {e}")
@@ -48,15 +48,15 @@ def reset_serial_connection(s, retry=3):
         
 def find_start_of_message(serial_port):
     buffer = b''
-    max_buffer_size = 1024  # Limit the buffer to 1024 bytes to prevent overflow
+    max_buffer_size = 256  # Limit the buffer to 256 bytes to prevent overflow
     buffer_exceeded_count = 0  # Counter for "Buffer Length Exceeded" occurrences
     while True:
         if len(buffer) > max_buffer_size:
             buffer = b''  # Clear buffer if max size exceeded
-            print("Buffer Length Exceeded")
+            # print("Buffer Length Exceeded")
             buffer_exceeded_count += 1
             if buffer_exceeded_count >= 1:
-                print("Attempting to reset the serial port due to frequent buffer overflows.")
+                # print("Attempting to reset the serial port due to frequent buffer overflows.")
                 serial_port = reset_serial_connection(serial_port)
                 if serial_port is None:
                     print("Failed to reset serial port. Exiting...")
@@ -316,7 +316,7 @@ def formatSNR(GNSSid, GSV, ZDA, satnum):
         SNR['snr'] = f"{GSV[f'snr{satnum}']:02d}"
 
     return SNR
-    
+
 def threaded_parser(s,print_sentences):
     # Counters
     ZDAcount = GSVcount = SNRcount = 0
