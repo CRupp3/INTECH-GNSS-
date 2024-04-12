@@ -12,6 +12,7 @@ def find_start_of_message(serial_port):
     while True:
         if len(buffer) > max_buffer_size:
             buffer = b''  # Clear buffer if max size exceeded
+            print("Buffer Length Exceeded")
             continue  # Skip to next byte without processing overflowing buffer
         byte = serial_port.read(1)
         if not byte:
