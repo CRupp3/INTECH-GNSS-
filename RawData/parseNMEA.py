@@ -379,8 +379,8 @@ def threaded_parser(s,print_sentences):
                             ZDAcount += 1
                         # Logic to Save and Rename File every 15 minutes
                         current_min = parsed_data['min']
-                        #if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):
-                        if prev_min is None or (current_min in [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] and current_min != prev_min):  
+                        if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):
+                        #if prev_min is None or (current_min in [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] and current_min != prev_min):  
                             if prev_min is not None:
                                 new_filename = f"{parsed_data['year']}_{parsed_data['month']:02d}_{parsed_data['day']:02d}_{parsed_data['hour']:02d}_{current_min:02d}.txt"
                                 try:
