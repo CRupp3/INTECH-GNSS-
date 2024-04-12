@@ -388,11 +388,9 @@ sleep_time_accumulated = 0
 current_min = None
 prev_min = None
 
-# Initialize deques for parsed data with a fixed maximum length
-MAX_ENTRIES = 1000
-ZDA = deque(maxlen=MAX_ENTRIES)
-GSV = deque(maxlen=MAX_ENTRIES)
-SNR = deque(maxlen=MAX_ENTRIES)
+# Initialize variables to hold the most recent data
+ZDA = None
+GSV = None
 
 # Ask user if they want to print NMEA messages to terminal
 print("Do you want to print NMEA sentences? (2 for sentence counters, 1 for all NMEA Sentences, 0 for No)")
@@ -450,12 +448,12 @@ try:
             if line.startswith('$'):
                 GNSSid = line[1:3]
                 SENTid = line[3:6]
-                if SENTid == "ZDA":  # ZDA Message
-                    ZDAcount += 1
+                if SENTid == "ZDA":  
                     # Parse ZDA message and store in ZDA structure
                     parsed_data = parseZDA(line, '$', GNSSid, SENTid)
                     if parsed_data is not None:
-                        ZDA.append(parsed_data)
+                        ZDA = parsed_data
+                        ZDAcount += 1
                     # Logic to Save and Rename File every 15 minutes
                     current_min = parsed_data['min']
                     #if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):
@@ -471,18 +469,16 @@ try:
                                 print(f"Error renaming file: {e}")
                         prev_min = current_min
                 elif SENTid == "GSV": # Parse GSV message and store in GSV structure
-                    GSVcount += 1
                     parsed_data,sat1,sat2,sat3,sat4 = parseGSV(line, '$', GNSSid, SENTid)
                     if parsed_data is not None:
-                        GSV.append(parsed_data)
-                    if ZDAcount > 0:
+                        GSV = parsed_data
+                        GSVcount += 1
+                    if ZDA and GSV:
                         with open(filename, 'a') as fid:
-                            # Process each satellite if it has valid data
                             for sat in [sat1, sat2, sat3, sat4]:
                                 if sat in [1, 2, 3, 4]:  # If satellite data is valid, write to file
                                     try:
-                                        snr_data = formatSNR(GNSSid, GSV[GSVcount-1], ZDA[ZDAcount-1], sat)
-                                        SNR.append(snr_data)
+                                        snr_data = formatSNR(GNSSid, GSV, ZDA, sat)
                                         data_str = f"{snr_data['gnssid']} {snr_data['satid']} {snr_data['elev']} {snr_data['azim']} {snr_data['snr']} {snr_data['year']} {snr_data['month']} {snr_data['day']} {snr_data['hour']} {snr_data['min']} {snr_data['sec']}\r\n"
                                         fid.write(data_str)
                                         SNRcount += 1
