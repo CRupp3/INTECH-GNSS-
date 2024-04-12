@@ -451,11 +451,11 @@ try:
                 GNSSid = line[1:3]
                 SENTid = line[3:6]
                 if SENTid == "ZDA":  # ZDA Message
+                    ZDAcount += 1
                     # Parse ZDA message and store in ZDA structure
                     parsed_data = parseZDA(line, '$', GNSSid, SENTid)
                     if parsed_data is not None:
                         ZDA.append(parsed_data)
-                        ZDAcount += 1
                     # Logic to Save and Rename File every 15 minutes
                     current_min = parsed_data['min']
                     #if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):
@@ -470,12 +470,11 @@ try:
                             except Exception as e:
                                 print(f"Error renaming file: {e}")
                         prev_min = current_min
-                elif SENTid == "GSV": # GSV Message
-                    # Parse GSV message and store in GSV structure
+                elif SENTid == "GSV": # Parse GSV message and store in GSV structure
+                    GSVcount += 1
                     parsed_data,sat1,sat2,sat3,sat4 = parseGSV(line, '$', GNSSid, SENTid)
                     if parsed_data is not None:
                         GSV.append(parsed_data)
-                        GSVcount += 1
                     if ZDAcount > 0:
                         with open(filename, 'a') as fid:
                             # Process each satellite if it has valid data
