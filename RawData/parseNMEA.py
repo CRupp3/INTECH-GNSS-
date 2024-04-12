@@ -452,10 +452,10 @@ try:
                 SENTid = line[3:6]
                 if SENTid == "ZDA":  # ZDA Message
                     # Parse ZDA message and store in ZDA structure
-                    ZDAcount += 1
                     parsed_data = parseZDA(line, '$', GNSSid, SENTid)
                     if parsed_data is not None:
                         ZDA.append(parsed_data)
+                        ZDAcount += 1
                     # Logic to Save and Rename File every 15 minutes
                     current_min = parsed_data['min']
                     #if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):
@@ -472,21 +472,21 @@ try:
                         prev_min = current_min
                 elif SENTid == "GSV": # GSV Message
                     # Parse GSV message and store in GSV structure
-                    GSVcount += 1
                     parsed_data,sat1,sat2,sat3,sat4 = parseGSV(line, '$', GNSSid, SENTid)
                     if parsed_data is not None:
                         GSV.append(parsed_data)
+                        GSVcount += 1
                     if ZDAcount > 0:
                         with open(filename, 'a') as fid:
                             # Process each satellite if it has valid data
                             for sat in [sat1, sat2, sat3, sat4]:
                                 if sat in [1, 2, 3, 4]:  # If satellite data is valid, write to file
-                                    SNRcount += 1
                                     try:
                                         snr_data = formatSNR(GNSSid, GSV[GSVcount-1], ZDA[ZDAcount-1], sat)
                                         SNR.append(snr_data)
                                         data_str = f"{snr_data['gnssid']} {snr_data['satid']} {snr_data['elev']} {snr_data['azim']} {snr_data['snr']} {snr_data['year']} {snr_data['month']} {snr_data['day']} {snr_data['hour']} {snr_data['min']} {snr_data['sec']}\r\n"
                                         fid.write(data_str)
+                                        SNRcount += 1
                                     except IndexError:
                                         print("Error: Index out of bounds. Skipping data processing for this item.")
                                     except KeyError:
