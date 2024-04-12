@@ -482,8 +482,6 @@ try:
                                         data_str = f"{snr_data['gnssid']} {snr_data['satid']} {snr_data['elev']} {snr_data['azim']} {snr_data['snr']} {snr_data['year']} {snr_data['month']} {snr_data['day']} {snr_data['hour']} {snr_data['min']} {snr_data['sec']}\r\n"
                                         fid.write(data_str)
                                         SNRcount += 1
-                                    except IndexError:
-                                        print("Error: Index out of bounds. Skipping data processing for this item.")
                                     except KeyError:
                                         print("Error: Missing key in snr_data. Skipping data processing for this item.")
                                     except Exception as e:
