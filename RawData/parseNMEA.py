@@ -4,6 +4,7 @@ import time
 import os
 import sys
 from datetime import datetime, timezone
+from collections import deque
 
 def find_start_of_message(serial_port):
     buffer = b''
@@ -378,18 +379,20 @@ NAVICcount = 0
 SNRcount = 0
 lastZDAcount = 0
 
-# Initialize Decode Error Counter
+# Initialize Error Counters
 error_count = 0
 max_errors = 100  
+sleep_time_accumulated = 0
 
 # Initiate Minute Counter
 current_min = None
 prev_min = None
 
-# Initialize Data Storage
-ZDA = []
-GSV = []
-SNR = []
+# Initialize deques for parsed data with a fixed maximum length
+MAX_ENTRIES = 1000
+ZDA = deque(maxlen=MAX_ENTRIES)
+GSV = deque(maxlen=MAX_ENTRIES)
+SNR = deque(maxlen=MAX_ENTRIES)
 
 # Ask user if they want to print NMEA messages to terminal
 print("Do you want to print NMEA sentences? (2 for sentence counters, 1 for all NMEA Sentences, 0 for No)")
@@ -414,8 +417,17 @@ try:
     filename = 'current.txt'
     while True:
         try:
-            line = s.readline().decode('utf-8').strip()  # Attempt to read and decode a line
-            error_count = 0  # Reset error count on successful read            
+            if s.in_waiting > 0:
+                line = s.readline().decode('utf-8').strip()  # Attempt to read and decode a line
+                error_count = 0  # Reset error count on successful read
+                sleep_time_accumulated = 0  # Reset the sleep time counter after receiving data
+            else:
+                time.sleep(0.1)  # Sleep briefly to yield control and reduce CPU load
+                sleep_time_accumulated += 0.1  # Accumulate the total sleep time
+                if sleep_time_accumulated > 30:
+                    print("Warning: No data received for over 30 seconds.")
+                    sleep_time_accumulated = 0  # Reset the counter after the warning
+                continue  # Continue to the next iteration to check data availability
         except UnicodeDecodeError:
             error_count += 1
             if error_count >= max_errors:
@@ -425,6 +437,7 @@ try:
                     print("Failed to reset serial port. Exiting...")
                     break  # Exit the loop if we cannot reset
                 error_count = 0  # Reset error count after resetting the port
+            s.flushInput() # Clear the input buffer of the serial object (s)
             find_start_of_message(s)
             try:
                 line = s.readline().decode('utf-8').strip()  # Try to read and decode again
@@ -454,7 +467,6 @@ try:
                                     os.rename(filename, new_filename)
                                     if print_sentences == 0:
                                         print(f"New File: {new_filename}")
-                                    #s.flushInput() # Clear the input buffer of the serial object (s)
                             except Exception as e:
                                 print(f"Error renaming file: {e}")
                         prev_min = current_min
@@ -470,8 +482,6 @@ try:
                             for sat in [sat1, sat2, sat3, sat4]:
                                 if sat in [1, 2, 3, 4]:  # If satellite data is valid, write to file
                                     SNRcount += 1
-                                    # SNR.append(formatSNR(GNSSid, GSV[GSVcount-1], ZDA[ZDAcount-1], sat))
-                                    # snr_data = SNR[SNRcount-1]
                                     try:
                                         snr_data = formatSNR(GNSSid, GSV[GSVcount-1], ZDA[ZDAcount-1], sat)
                                         SNR.append(snr_data)
