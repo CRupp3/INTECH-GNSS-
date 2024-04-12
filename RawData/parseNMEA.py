@@ -55,7 +55,7 @@ def find_start_of_message(serial_port):
             buffer = b''  # Clear buffer if max size exceeded
             print("Buffer Length Exceeded")
             buffer_exceeded_count += 1
-            if buffer_exceeded_count >= 3:
+            if buffer_exceeded_count >= 1:
                 print("Attempting to reset the serial port due to frequent buffer overflows.")
                 serial_port = reset_serial_connection(serial_port)
                 if serial_port is None:
