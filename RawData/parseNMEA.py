@@ -432,7 +432,9 @@ def main():
         print("Invalid input. Please enter 0,1, or 2.")
         sys.exit(1)
 
-    s = setup_serial() 
+    print("Input Serial Port Number")
+    portNum = int(input())
+    s = setup_serial(115200,1,portNum) 
     
     # Creating Reyax Commands
     # End of command
