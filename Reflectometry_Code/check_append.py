@@ -101,7 +101,7 @@ class Handler(FileSystemEventHandler):
         if calcedHeight is not None:
             calcedHeight_string = f'{calcedHeight:.3f}'
         else:
-            calcedHeight_string = calcedHeight
+            calcedHeight_string = str(calcedHeight)
         print(calcedHeight, time)
         health_string = CheckHealth(time)
 
