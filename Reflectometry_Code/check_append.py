@@ -98,10 +98,10 @@ class Handler(FileSystemEventHandler):
 
         calcedHeight, time = calculate_file_name(filename, QC_filename, dynamic, interpolate, printFailReasons, showAllPlots)
         
-        if calcedHeight == 'None':
-            calcedHeight_string = calcedHeight
-        else:
+        if calcedHeight is not 'None':
             calcedHeight_string = f'{calcedHeight:.3f}'
+        else:
+            calcedHeight_string = calcedHeight
         print(calcedHeight, time)
         health_string = CheckHealth(time)
 
