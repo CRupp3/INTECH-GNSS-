@@ -13,7 +13,7 @@ from time import strftime
 
 def CheckChargeData():
     # Setup serial port
-    mppt = serial.Serial('/dev/ttyUSB0', 19200, timeout=2)  #  Adjust '/dev/ttyUSB0' as per the Raspberry Pi's serial port
+    mppt = serial.Serial('/dev/ttyUSB1', 19200, timeout=2)  #  Adjust '/dev/ttyUSB0' as per the Raspberry Pi's serial port
 
     # Command for Get Status
     command = bytes([7])  # Command code for Get

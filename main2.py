@@ -48,7 +48,7 @@ while True:
     #print(strftime("%S")) # debug message
 
 
-    if strftime("%M") == "00":  # Top of the hour
+    if strftime("%M") in  ["00"]: #,"15"]:  # Top of the hour
         # print('Top') #debug message
         # Check Charge controller - done
         # Check Temperature - missing
@@ -107,7 +107,7 @@ while True:
 
         swarm.close()
 
-    elif strftime("%M") in ["15", "30", "45"]:  # Not top of hour
+    elif strftime("%M") in ["30", "45"]:  # Not top of hour
         # print('Inner') # debug message
         # record charge controller data - done
         # ask swarm for received messages - done
