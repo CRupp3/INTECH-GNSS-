@@ -42,4 +42,4 @@ def CheckHealth(time):
 
 if __name__ == '__main__':
     string = CheckHealth('time')
-    print(string)
+    #print(string)
