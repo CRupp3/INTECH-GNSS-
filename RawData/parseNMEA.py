@@ -38,7 +38,7 @@ def reset_serial_connection(s, retry=3):
             s.close()
             time.sleep(1)
             s.open()
-            # print("Serial port reset successfully on attempt", attempt + 1)
+            print("Serial port reset successfully on attempt", attempt + 1)
             return s
         except serial.SerialException as e:
             print(f"Attempt {attempt + 1}: Failed to reset the serial connection: {e}")
@@ -317,6 +317,204 @@ def formatSNR(GNSSid, GSV, ZDA, satnum):
 
     return SNR
 
+
+# s = setup_serial() 
+
+# # Creating Reyax Commands
+# # End of command
+# CFLF = b'\x0D\x0A'  # Equivalent to hex2dec(["0D", "0A"])
+
+# # Serial Port Startup
+# # @GGNS: Acquire the positioning-use satellite setting
+# GGNS = b'@GGNS' + CFLF
+# # @VER: Firmware revision number acquisition
+# VER = b'@VER' + CFLF
+
+# # Inject Current UTC Time
+# # @GTIM: Time setting
+# utcTime = datetime.now(timezone.utc)
+# GTIM = f'@GTIM {utcTime.year} {utcTime.month} {utcTime.day} {utcTime.hour} {utcTime.minute} {utcTime.second}'.encode() + CFLF
+
+# # Save Backup Data For Hot Start
+# # @BUP: Backup data saving
+# BUP = b'@BUP' + CFLF
+
+# # 1 Pulse Per Second Output Enable
+# # @GPPS: 1PPS output setting
+# GPPS = b'@GPPS 1' + CFLF
+
+# # Idle Mode
+# # @GSTP: Positioning stop
+# GSTP = b'@GSTP' + CFLF
+
+# # Cold Start
+# GCD = b'@GCD' + CFLF
+
+# # Hot Start
+# # @GSR: Hot start
+# GSR = b'@GSR' + CFLF
+
+# # Set Which Satellites will be tracked (for now all of them)
+# # @GNS: Positioning-use satellite setting
+# GNS = f'@GNS 0x{16383:X}'.encode() + CFLF # All satellites
+# # GNS = f'@GNS 0x{257:X}'.encode() + CFLF  # GPS L1L5 -> GP
+# # GNS = f'@GNS 0x{552:X}'.encode() + CFLF  # QZSS L1-C L1-S L5 -> GQ
+# # GNS = f'@GNS 0x{3136:X}'.encode() + CFLF  # Beidou B1 B1C B2A -> GB
+# # GNS = f'@GNS 0x{4224:X}'.encode() + CFLF  # Galileo E1B E5A -> GA
+# # GNS = f'@GNS 0x{1:X}'.encode() + CFLF  # GPS L1 -> GP -> SigID: 1
+# # GNS = f'@GNS 0x{2:X}'.encode() + CFLF  # GLONASS -> GL -> SigID: 1
+# # GNS = f'@GNS 0x{4:X}'.encode() + CFLF  # SBAS -> ? -> SigID: ?
+# # GNS = f'@GNS 0x{8:X}'.encode() + CFLF  # QZSS L1-C/A -> GQ -> SigID: 1
+# # GNS = f'@GNS 0x{32:X}'.encode() + CFLF  # QZSS L1-S -> GQ -> SigID: ?
+# # GNS = f'@GNS 0x{64:X}'.encode() + CFLF  # Beidou B1l -> GB -> SigID: 1
+# # GNS = f'@GNS 0x{128:X}'.encode() + CFLF  # Galileo E1B/C -> GA -> SigID: 7
+# # GNS = f'@GNS 0x{256:X}'.encode() + CFLF  # GPS L5 -> GP -> SigID: 7
+# # GNS = f'@GNS 0x{512:X}'.encode() + CFLF  # QZSS L5 -> GQ -> SigID: 7
+# # GNS = f'@GNS 0x{1024:X}'.encode() + CFLF  # Beidou B1C -> GB -> SigID: 3
+# # GNS = f'@GNS 0x{2048:X}'.encode() + CFLF  # Beidou B2a -> GB -> SigID: 5
+# # GNS = f'@GNS 0x{4096:X}'.encode() + CFLF  # Galileo E5a -> GA -> SigID: 1
+# # GNS = f'@GNS 0x{8192:X}'.encode() + CFLF  # NavIC -> GI -> SigID: 1
+
+# # Set which messages to output
+# # @BSSL: Output sentence select
+# BSSL = f'@BSSL 0x{136:X}'.encode() + CFLF  # ZDA and GSV
+# # BSSL = f'@BSSL 0x{8:X}'.encode() + CFLF  # GSV
+
+# # Execute Commands
+# s.write(GSTP)
+# s.write(GTIM)
+# s.write(GNS)
+# s.write(BSSL)
+# s.write(GSR)
+
+# time.sleep(3)
+
+# # Initialize Counters
+# ZDAcount = 0
+# GSVcount = 0
+# SNRcount = 0
+# lastZDAcount = 0
+
+# # Initialize Error Counters
+# error_count = 0
+# max_errors = 100  
+# sleep_time_accumulated = 0
+
+# # Initiate Minute Counter
+# current_min = None
+# prev_min = None
+
+# # Initialize variables to hold the most recent data
+# ZDA = None
+# GSV = None
+
+# # Ask user if they want to print NMEA messages to terminal
+# print("Do you want to print NMEA sentences? (2 for sentence counters, 1 for all NMEA Sentences, 0 for No)")
+# user_input = input()  
+# try:
+#     print_sentences = int(user_input)
+#     if print_sentences not in [0, 1, 2]:
+#         raise ValueError("Invalid input")
+# except ValueError:
+#     print("Invalid input. Please enter 0,1, or 2.")
+#     exit()  
+    
+# # Check if current.txt exists and if it does clear its contents 
+# filename = 'current.txt'
+# if os.path.exists(filename):
+#     open(filename, 'w').close()
+
+# print('Start')
+
+# try:
+#     print('Listening for serial data...')
+#     filename = 'current.txt'
+#     while True:
+#         try:
+#             if s.in_waiting > 0:
+#                 line = s.readline().decode('utf-8').strip()  # Attempt to read and decode a line
+#                 error_count = 0  # Reset error count on successful read
+#                 sleep_time_accumulated = 0  # Reset the sleep time counter after receiving data
+#             else:
+#                 time.sleep(0.1)  # Sleep briefly to yield control and reduce CPU load
+#                 sleep_time_accumulated += 0.1  # Accumulate the total sleep time
+#                 if sleep_time_accumulated > 30:
+#                     print("Warning: No data received for over 30 seconds.")
+#                     sleep_time_accumulated = 0  # Reset the counter after the warning
+#                 continue  # Continue to the next iteration to check data availability
+#         except UnicodeDecodeError:
+#             error_count += 1
+#             if error_count >= max_errors:
+#                 print(f"Too many consecutive decode errors. Attempting to reset serial port...")
+#                 s = reset_serial_connection(s)  # Attempt to reset the connection
+#                 if s is None:
+#                     print("Failed to reset serial port. Exiting...")
+#                     break  # Exit the loop if we cannot reset
+#                 error_count = 0  # Reset error count after resetting the port
+#             s.flushInput() # Clear the input buffer of the serial object (s)
+#             find_start_of_message(s)
+#             try:
+#                 line = s.readline().decode('utf-8').strip()  # Try to read and decode again
+#             except UnicodeDecodeError:
+#                 print("Error decoding line. Skipping faulty data.")
+#                 continue  # If it still fails, skip this iteration
+#         if print_sentences == 1:
+#             print(line)
+#         if line:
+#             if line.startswith('$'):
+#                 GNSSid = line[1:3]
+#                 SENTid = line[3:6]
+#                 if SENTid == "ZDA":  
+#                     # Parse ZDA message and store in ZDA structure
+#                     parsed_data = parseZDA(line, '$', GNSSid, SENTid)
+#                     if parsed_data is not None:
+#                         ZDA = parsed_data
+#                         ZDAcount += 1
+#                     # Logic to Save and Rename File every 15 minutes
+#                     current_min = parsed_data['min']
+#                     #if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):
+#                     if prev_min is None or (current_min in [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] and current_min != prev_min):  
+#                         if prev_min is not None:
+#                             new_filename = f"{parsed_data['year']}_{parsed_data['month']:02d}_{parsed_data['day']:02d}_{parsed_data['hour']:02d}_{current_min:02d}.txt"
+#                             try:
+#                                 if os.path.exists(filename):  # Check if 'current.txt' exists
+#                                     os.rename(filename, new_filename)
+#                                     if print_sentences == 0:
+#                                         print(f"New File: {new_filename}")
+#                             except Exception as e:
+#                                 print(f"Error renaming file: {e}")
+#                         prev_min = current_min
+#                 elif SENTid == "GSV": # Parse GSV message and store in GSV structure
+#                     parsed_data,sat1,sat2,sat3,sat4 = parseGSV(line, '$', GNSSid, SENTid)
+#                     if parsed_data is not None:
+#                         GSV = parsed_data
+#                         GSVcount += 1
+#                     if ZDA and GSV:
+#                         with open(filename, 'a') as fid:
+#                             for sat in [sat1, sat2, sat3, sat4]:
+#                                 if sat in [1, 2, 3, 4]:  # If satellite data is valid, write to file
+#                                     try:
+#                                         snr_data = formatSNR(GNSSid, GSV, ZDA, sat)
+#                                         data_str = f"{snr_data['gnssid']} {snr_data['satid']} {snr_data['elev']} {snr_data['azim']} {snr_data['snr']} {snr_data['year']} {snr_data['month']} {snr_data['day']} {snr_data['hour']} {snr_data['min']} {snr_data['sec']}\r\n"
+#                                         fid.write(data_str)
+#                                         SNRcount += 1
+#                                     except KeyError:
+#                                         print("Error: Missing key in snr_data. Skipping data processing for this item.")
+#                                     except Exception as e:
+#                                         # Catch other potential errors and print a generic message or the exception
+#                                         print(f"An error occurred: {str(e)}. Skipping data processing for this item.")
+#         if lastZDAcount != ZDAcount and print_sentences == 2:
+#             sys.stdout.write(f"\rTotal ZDA messages: {ZDAcount} | Total GSV messages: {GSVcount} | Total SNR Messages: {SNRcount}")
+#             sys.stdout.flush()
+#             lastZDAcount = ZDAcount
+# except KeyboardInterrupt: # (Ctrl+C)
+#     print("\nExiting...")
+#     print(f"Total ZDA messages: {ZDAcount}")
+#     print(f"Total GSV messages: {GSVcount}")
+#     print(f"Total SNR Messages: {SNRcount}")
+# finally:
+#     s.close() # Close the serial port when done
+    
 def threaded_parser(s,print_sentences):
     # Counters
     ZDAcount = GSVcount = SNRcount = 0
@@ -379,8 +577,8 @@ def threaded_parser(s,print_sentences):
                             ZDAcount += 1
                         # Logic to Save and Rename File every 15 minutes
                         current_min = parsed_data['min']
-                        if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):
-                        #if prev_min is None or (current_min in [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] and current_min != prev_min):  
+                        #if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):
+                        if prev_min is None or (current_min in [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] and current_min != prev_min):  
                             if prev_min is not None:
                                 new_filename = f"{parsed_data['year']}_{parsed_data['month']:02d}_{parsed_data['day']:02d}_{parsed_data['hour']:02d}_{current_min:02d}.txt"
                                 try:
@@ -431,7 +629,7 @@ def main():
     except ValueError:
         print("Invalid input. Please enter 0,1, or 2.")
         sys.exit(1)
-
+        
     print("Input Serial Port Number")
     portNum = int(input())
     s = setup_serial(115200,1,portNum) 
