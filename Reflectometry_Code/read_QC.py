@@ -5,7 +5,7 @@ def read_QC(filename):
     emin = 5
     emax = 25
     ediff = 10
-    maxHeight = 8
+    maxHeight = 6
     desiredPrecision = 0.005
     frange_0 = 0 
     frange_1 = 5
