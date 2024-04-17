@@ -3,7 +3,7 @@ import numpy as np
 def read_QC(filename):
     # Default values 
     emin = 5
-    emax = 25
+    emax = 30
     ediff = 10
     maxHeight = 6
     desiredPrecision = 0.005
