@@ -38,7 +38,7 @@ def reset_serial_connection(s, retry=3):
             s.close()
             time.sleep(1)
             s.open()
-            # print("Serial port reset successfully on attempt", attempt + 1)
+            print("Serial port reset successfully on attempt", attempt + 1)
             return s
         except serial.SerialException as e:
             print(f"Attempt {attempt + 1}: Failed to reset the serial connection: {e}")
@@ -316,26 +316,24 @@ def formatSNR(GNSSid, GSV, ZDA, satnum):
         SNR['snr'] = f"{GSV[f'snr{satnum}']:02d}"
 
     return SNR
-
-def threaded_parser(s,print_sentences):
+    
+def threaded_parser(s,print_sentences,sampleRate=1):
     # Counters
     ZDAcount = GSVcount = SNRcount = 0
     lastZDAcount = 0
     error_count = max_errors = 100  
     sleep_time_accumulated = 0
     current_min = prev_min = None
-    ZDA = GSV = None
+    ZDA = None
+    GSV_data = []
         
     # File management
     filename = 'current.txt'
     if os.path.exists(filename):
         open(filename, 'w').close()  # Clear existing file contents
     
-    print('Start')
-    
     try:
         print('Listening for serial data...')
-        filename = 'current.txt'
         while True:
             try:
                 if s.in_waiting > 0:
@@ -370,46 +368,44 @@ def threaded_parser(s,print_sentences):
             if line:
                 if line.startswith('$'):
                     GNSSid = line[1:3]
-                    SENTid = line[3:6]
-                    if SENTid == "ZDA":  
-                        # Parse ZDA message and store in ZDA structure
+                    SENTid = line[3:6]                       
+                    if SENTid == "ZDA":
                         parsed_data = parseZDA(line, '$', GNSSid, SENTid)
-                        if parsed_data is not None:
+                        if parsed_data:
                             ZDA = parsed_data
                             ZDAcount += 1
-                        # Logic to Save and Rename File every 15 minutes
-                        current_min = parsed_data['min']
-                        if prev_min is None or (current_min in [0, 15, 30, 45] and current_min != prev_min):
-                        #if prev_min is None or (current_min in [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] and current_min != prev_min):  
-                            if prev_min is not None:
-                                new_filename = f"{parsed_data['year']}_{parsed_data['month']:02d}_{parsed_data['day']:02d}_{parsed_data['hour']:02d}_{current_min:02d}.txt"
-                                try:
-                                    if os.path.exists(filename):  # Check if 'current.txt' exists
+                            current_min = parsed_data['min']
+                            current_sec = parsed_data['sec']
+                            # Process all stored GSV data with the latest ZDA information
+                            if current_sec % sampleRate == 0:
+                                with open(filename, 'a') as fid:
+                                    for gsv_gnssid, GSV, valid_sats in GSV_data:
+                                        for sat in valid_sats:
+                                            try:
+                                                snr_data = formatSNR(gsv_gnssid, GSV, ZDA, sat)
+                                                data_str = f"{snr_data['gnssid']} {snr_data['satid']} {snr_data['elev']} {snr_data['azim']} {snr_data['snr']} {snr_data['year']} {snr_data['month']} {snr_data['day']} {snr_data['hour']} {snr_data['min']} {snr_data['sec']}\r\n"
+                                                fid.write(data_str)
+                                                SNRcount += 1
+                                            except KeyError:
+                                                print("Error: Missing key in snr_data. Skipping data processing for this item.")
+                                            except Exception as e:
+                                                print(f"An error occurred: {str(e)}. Skipping data processing for this item.")
+                            GSV_data.clear()
+                            # Save a new file every 5 minutes
+                            if prev_min is None or (current_min % 5 == 0 and current_min != prev_min):
+                                if prev_min is not None:
+                                    new_filename = f"{parsed_data['year']}_{parsed_data['month']:02d}_{parsed_data['day']:02d}_{parsed_data['hour']:02d}_{current_min:02d}.txt"
+                                    if os.path.exists(filename):
                                         os.rename(filename, new_filename)
                                         if print_sentences == 0:
                                             print(f"New File: {new_filename}")
-                                except Exception as e:
-                                    print(f"Error renaming file: {e}")
-                            prev_min = current_min
-                    elif SENTid == "GSV": # Parse GSV message and store in GSV structure
-                        parsed_data,sat1,sat2,sat3,sat4 = parseGSV(line, '$', GNSSid, SENTid)
-                        if parsed_data is not None:
-                            GSV = parsed_data
-                            GSVcount += 1
-                        if ZDA and GSV:
-                            with open(filename, 'a') as fid:
-                                for sat in [sat1, sat2, sat3, sat4]:
-                                    if sat in [1, 2, 3, 4]:  # If satellite data is valid, write to file
-                                        try:
-                                            snr_data = formatSNR(GNSSid, GSV, ZDA, sat)
-                                            data_str = f"{snr_data['gnssid']} {snr_data['satid']} {snr_data['elev']} {snr_data['azim']} {snr_data['snr']} {snr_data['year']} {snr_data['month']} {snr_data['day']} {snr_data['hour']} {snr_data['min']} {snr_data['sec']}\r\n"
-                                            fid.write(data_str)
-                                            SNRcount += 1
-                                        except KeyError:
-                                            print("Error: Missing key in snr_data. Skipping data processing for this item.")
-                                        except Exception as e:
-                                            # Catch other potential errors and print a generic message or the exception
-                                            print(f"An error occurred: {str(e)}. Skipping data processing for this item.")
+                                prev_min = current_min
+                    elif SENTid == "GSV":
+                        parsed_data, sat1, sat2, sat3, sat4 = parseGSV(line, '$', GNSSid, SENTid)
+                        if parsed_data:
+                            # Append the parsed GSV data along with the current list of valid satellites
+                            GSV_data.append((GNSSid, parsed_data, [sat for sat in [sat1, sat2, sat3, sat4] if sat != 0]))
+                            GSVcount += 1 
             if lastZDAcount != ZDAcount and print_sentences == 2:
                 sys.stdout.write(f"\rTotal ZDA messages: {ZDAcount} | Total GSV messages: {GSVcount} | Total SNR Messages: {SNRcount}")
                 sys.stdout.flush()
@@ -431,7 +427,10 @@ def main():
     except ValueError:
         print("Invalid input. Please enter 0,1, or 2.")
         sys.exit(1)
-
+        
+    print("Write to file every [x] seconds - Must be evenly divisible by 60")
+    sampleRate = int(input())
+    
     print("Input Serial Port Number")
     portNum = int(input())
     s = setup_serial(115200,1,portNum) 
@@ -504,7 +503,7 @@ def main():
     s.write(GSR)
 
     # Start thread
-    data_thread = threading.Thread(target=threaded_parser, args=(s, print_sentences))
+    data_thread = threading.Thread(target=threaded_parser, args=(s, print_sentences, sampleRate))
     data_thread.start()
     data_thread.join()  # Wait for the thread to finish if necessary
 

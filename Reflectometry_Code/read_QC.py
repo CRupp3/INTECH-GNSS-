@@ -3,14 +3,14 @@ import numpy as np
 def read_QC(filename):
     # Default values 
     emin = 5
-    emax = 25
+    emax = 30
     ediff = 10
-    maxHeight = 8
+    maxHeight = 6
     desiredPrecision = 0.005
     frange_0 = 0 
     frange_1 = 5
     minAmp = 2  # Arbitrary value which should let everything pass through 
-    minRH = 0.4  # meters
+    minRH = 2  # meters
     maxArcTime = 1  # one hour
     pknoiseCrit = 3.5
     azmin = 0
