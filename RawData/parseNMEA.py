@@ -5,6 +5,7 @@ import os
 import sys
 import threading
 from datetime import datetime, timezone
+from usbFind import find_ports
 from collections import deque
 
 def setup_serial(baud_rate=115200, timeout=1, port_index=0):
@@ -14,8 +15,9 @@ def setup_serial(baud_rate=115200, timeout=1, port_index=0):
         port = ports[port_index].device
         try:
             # Create a serial connection with fixed parity, stopbits, and bytesize
+            (reyax_port, charge_port) = find_ports()
             s = serial.Serial(
-                port, 
+                reyax_port,
                 baud_rate, 
                 timeout=timeout, 
                 parity=serial.PARITY_NONE,   # Fixed parity
