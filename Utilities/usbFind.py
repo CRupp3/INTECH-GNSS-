@@ -110,6 +110,7 @@ def method6():
 def find_ports():
     ports = serial.tools.list_ports.comports()
     max = len(ports)
+    print(max)
 
     for port in ports:
         if port.description == "FT23R USB UART - FT23R USB UART":
@@ -117,8 +118,7 @@ def find_ports():
         elif port.description == "VE Direct cable - VE Direct cable":
             charge_port = port.device
 
-
-    return charge_port, reyax_port
+        return charge_port, reyax_port
 
 
 if __name__ == '__main__':
@@ -128,6 +128,6 @@ if __name__ == '__main__':
     #method4()
     #method5()
     #method6()
-    charge_port, reyax_port = find_ports()
+    (charge_port, reyax_port) = find_ports()
     print(charge_port)
     print(reyax_port)
