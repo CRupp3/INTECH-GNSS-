@@ -84,20 +84,26 @@ def method5():
     for bus in busses:
         devices = bus.devices
         for dev in devices:
-            print
             repr(dev)
-            print
-            "Device:", dev.filename
-            print
-            "  idVendor: %d (0x%04x)" % (dev.idVendor, dev.idVendor)
-            print
-            "  idProduct: %d (0x%04x)" % (dev.idProduct, dev.idProduct)
-            print
-            "Manufacturer:", dev.iManufacturer
-            print
-            "Serial:", dev.iSerialNumber
-            print
-            "Product:", dev.iProduct
+            print("Device:", dev.filename)
+            print("  idVendor: %d (0x%04x)" % (dev.idVendor, dev.idVendor))
+            print("  idProduct: %d (0x%04x)" % (dev.idProduct, dev.idProduct))
+            print("Manufacturer:", dev.iManufacturer)
+            print("Serial:", dev.iSerialNumber)
+            print("Product:", dev.iProduct)
+
+
+def method6():
+    # Find all USB devices
+    devices = usb.core.find(find_all=True)
+
+    if devices is None:
+        print("No USB devices found.")
+        return
+
+    print("List of connected USB devices:")
+    for device in devices:
+        print(device)
 
 
 if __name__ == '__main__':
@@ -105,4 +111,5 @@ if __name__ == '__main__':
     #method2()
     #method3()
     #method4()
-    method5()
+    #method5()
+    method6()
