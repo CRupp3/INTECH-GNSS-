@@ -113,7 +113,7 @@ def find_ports():
     print(max,' ports found')
 
     for port in ports:
-        if port.description == "FT23R USB UART - FT23R USB UART":
+        if port.description == "FT232R USB UART - FT232R USB UART":
             print('Found Reyax')
             reyax_port = port.device
         elif port.description == "VE Direct cable - VE Direct cable":
