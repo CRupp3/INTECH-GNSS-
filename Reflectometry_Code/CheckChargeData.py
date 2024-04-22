@@ -1,6 +1,7 @@
 import serial
 import time
 from time import strftime
+from usbFind import find_ports
 
 
 # Copying from Dev's code
@@ -13,7 +14,8 @@ from time import strftime
 
 def CheckChargeData():
     # Setup serial port
-    mppt = serial.Serial('/dev/ttyUSB1', 19200, timeout=2)  #  Adjust '/dev/ttyUSB0' as per the Raspberry Pi's serial port
+    (reyax_port, charge_port) = find_ports()
+    mppt = serial.Serial(charge_port, 19200, timeout=2)  #  Adjust '/dev/ttyUSB0' as per the Raspberry Pi's serial port
 
     # Command for Get Status
     command = bytes([7])  # Command code for Get
