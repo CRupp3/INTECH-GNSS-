@@ -118,7 +118,8 @@ def find_ports():
         elif port.description == "VE Direct cable - VE Direct cable":
             charge_port = port.device
 
-        return charge_port, reyax_port
+    print(reyax_port)
+    print(charge_port)
 
 
 if __name__ == '__main__':
