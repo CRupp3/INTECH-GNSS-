@@ -110,16 +110,22 @@ def method6():
 def find_ports():
     ports = serial.tools.list_ports.comports()
     max = len(ports)
-    print(max)
+    print(max,' ports found')
 
     for port in ports:
         if port.description == "FT23R USB UART - FT23R USB UART":
+            print('Found Reyax')
             reyax_port = port.device
         elif port.description == "VE Direct cable - VE Direct cable":
+            print('Found Charge Controller')
             charge_port = port.device
+        else:
+            print('Aint Found Shit')
+    try:
+        return reyax_port, charge_port
+    except UnboundLocalError as e:
+        print('No Ports Found')
 
-    print(reyax_port)
-    print(charge_port)
 
 
 if __name__ == '__main__':
@@ -129,6 +135,4 @@ if __name__ == '__main__':
     #method4()
     #method5()
     #method6()
-    (charge_port, reyax_port) = find_ports()
-    print(charge_port)
-    print(reyax_port)
+    find_ports()
