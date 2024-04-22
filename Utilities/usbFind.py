@@ -2,6 +2,8 @@ import re
 import subprocess
 import sys
 import usb.core
+import serial.tools.list_ports
+
 
 def method1():
     device_re = re.compile(b"Bus\s+(?P<bus>\d+)\s+Device\s+(?P<device>\d+).+ID\s(?P<id>\w+:\w+)\s(?P<tag>.+)$", re.I)
@@ -105,6 +107,19 @@ def method6():
     for device in devices:
         print(device)
 
+def find_ports():
+    ports = serial.tools.list_ports.comports()
+    max = len(ports)
+
+    for port in ports:
+        if port.description == "FT23R USB UART - FT23R USB UART":
+            reyax_port = port.device
+        elif port.description == "VE Direct cable - VE Direct cable":
+            charge_port = port.device
+
+
+    return charge_port, reyax_port
+
 
 if __name__ == '__main__':
     #method1()
@@ -112,4 +127,7 @@ if __name__ == '__main__':
     #method3()
     #method4()
     #method5()
-    method6()
+    #method6()
+    charge_port, reyax_port = find_ports()
+    print(charge_port)
+    print(reyax_port)
