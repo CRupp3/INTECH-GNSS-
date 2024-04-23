@@ -394,7 +394,7 @@ def threaded_parser(s,print_sentences,sampleRate=1):
                                                 print(f"An error occurred: {str(e)}. Skipping data processing for this item.")
                             GSV_data.clear()
                             # Save a new file every 5 minutes
-                            if prev_min is None or (current_min % 5 == 0 and current_min != prev_min):
+                            if prev_min is None or (current_min % 15 == 0 and current_min != prev_min):
                                 if prev_min is not None:
                                     new_filename = f"{parsed_data['year']}_{parsed_data['month']:02d}_{parsed_data['day']:02d}_{parsed_data['hour']:02d}_{current_min:02d}.txt"
                                     if os.path.exists(filename):
