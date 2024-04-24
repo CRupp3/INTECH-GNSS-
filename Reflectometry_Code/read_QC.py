@@ -10,9 +10,9 @@ def read_QC(filename):
     frange_0 = 0 
     frange_1 = 5
     minAmp = 2  # Arbitrary value which should let everything pass through 
-    minRH = 2  # meters
+    minRH = 2.5  # meters
     maxArcTime = 1  # one hour
-    pknoiseCrit = 3.5
+    pknoiseCrit = 3
     azmin = 0
     azmax = 360
     
