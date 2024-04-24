@@ -110,7 +110,7 @@ def method6():
 def find_ports():
     ports = serial.tools.list_ports.comports()
     max = len(ports)
-    print(max,' ports found')
+    # print(max,' ports found')
 
     for port in ports:
         if port.description == "FT232R USB UART - FT232R USB UART":
