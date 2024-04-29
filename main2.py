@@ -44,11 +44,11 @@ while True:
     if uptime > days*24*60*60:
         os.system('reboot')
 
-    sleep(1*60)  # sleep 1 minute
-    #print(strftime("%S")) # debug message
+    sleep(60)  # sleep 1 minute
+    print(strftime("%M, %S")) # debug message
 
 
-    if strftime("%M") in  ["00"]: #,"15"]:  # Top of the hour
+    if strftime("%M") in  ["00"]:  #, "15"]:  # Top of the hour
         # print('Top') #debug message
         # Check Charge controller - done
         # Check Temperature - missing
@@ -59,7 +59,7 @@ while True:
         # check charge controller
         # format swarm message
         # N001 022824 1949 1.235 2.346 3.457 0
-
+        print('sending')
         message_file_path = '/home/intech/INTECH-GNSS-/MessageLog.txt'
         message_file = open(message_file_path, 'r')
         lines = message_file.readlines()
@@ -107,7 +107,7 @@ while True:
 
         swarm.close()
 
-    elif strftime("%M") in ["30", "45"]:  # Not top of hour
+    elif strftime("%M") in ["15","30", "45"]:  # Not top of hour
         # print('Inner') # debug message
         # record charge controller data - done
         # ask swarm for received messages - done

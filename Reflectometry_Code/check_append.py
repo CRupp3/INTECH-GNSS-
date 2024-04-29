@@ -107,7 +107,7 @@ class Handler(FileSystemEventHandler):
 
         MessageLogPath = '/home/intech/INTECH-GNSS-/MessageLog.txt'
         messagelog = open(MessageLogPath, 'a')
-        messagelog.write('N002' + '-' + time + '-' + calcedHeight_string + '-' + health_string + '\n')
+        messagelog.write('N004' + '-' + time + '-' + calcedHeight_string + '-' + health_string + '\n')
         messagelog.close()
 
     def on_created(self, event):
